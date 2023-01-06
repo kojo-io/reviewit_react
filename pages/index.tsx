@@ -1,20 +1,64 @@
 import Head from 'next/head'
 import {PiButton} from "./shared/pi-button";
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import PiInput from "./shared/pi-input";
+import {ApiResponse} from "./models/ApiResponse";
+import {LoginResponseModel} from "./models/LoginResponseModel";
+import {MessageProps, PiMessage} from "./shared/pi-message";
+import {environment} from "./shared/environment";
+import {BaseService} from "./shared/base.service";
 
 export default function Home() {
     const router = useRouter();
-    const [loginForm, setLoginValues] = useState({email: '', password: ''});
+    const [loginForm, setLoginValues] = useState({userName: '', password: ''});
 
-    const routeToOrganizationDashboard = () => {
-        router.push('/organisation/org-dashboard');
+    const messageDialog: MessageProps = {
+        open: false,
+        message: '',
+        type: "success"
+    }
+    const [openDialog, setOpenDialog] = useState(messageDialog);
+
+    const loginHandler = async () => {
+        const url = environment.apiUrl;
+        try {
+            const response = await fetch(`${url}Account/AccountLogin`, {
+                method: 'POST',
+                body: JSON.stringify(loginForm),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = await response.json() as ApiResponse<LoginResponseModel>;
+            if (result.status === 100) {
+                // openMessageHandler({type: "success", message: result.message, open: true});
+                BaseService.setSessionData(result.data);
+                router.push('/organisation/org-dashboard').then();
+            } else {
+                openMessageHandler({type: "error", message: result.message, open: true});
+            }
+        } catch (e: any) {
+            openMessageHandler({type: "error", message: e.statusMessage, open: true});
+        }
     }
 
     const emailInputOnChange = (event: any) => {
         setLoginValues((prevState) => {
-            return {...prevState, email: event.target.value}
+            return {...prevState, userName: event.target.value}
+        });
+    }
+
+    const openMessageHandler = (options: MessageProps) => {
+        setOpenDialog((prevState) => {
+            return {...prevState, open: options.open, message: options.message, type: options.type }
+        });
+    }
+
+    const closeMessageHandler = () => {
+        setOpenDialog((prevState) => {
+            return {...prevState, open: false }
         });
     }
 
@@ -32,6 +76,9 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            {
+                openDialog.open && <PiMessage onClose={closeMessageHandler} message={openDialog.message} type={openDialog.type}/>
+            }
             <div className={'h-screen w-screen'}>
                 <div className={'flex flex-col w-full h-full overflow-auto'}>
                     <div className={'grid md:grid-cols-1 lg:grid-cols-2 h-full'}>
@@ -45,7 +92,7 @@ export default function Home() {
                                             <div>
                                                 <PiInput
                                                     label={'Enter your email'}
-                                                    value={loginForm.email}
+                                                    value={loginForm.userName}
                                                     onChange={emailInputOnChange}
                                                     required={true}
                                                     type={'email'}
@@ -63,7 +110,7 @@ export default function Home() {
                                                 </PiInput>
                                             </div>
                                             <div>
-                                                <PiButton onClick={routeToOrganizationDashboard}>
+                                                <PiButton onClick={loginHandler}>
                                                     Submit
                                                 </PiButton>
                                             </div>

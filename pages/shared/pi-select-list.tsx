@@ -1,8 +1,9 @@
-import {BaseService} from "./base.service";
+
 import React, {useEffect, useState} from "react";
 import 'primeicons/primeicons.css';
+import {uuid} from "./base.service";
 const PiSelectList = (props: any) => {
-    const id = BaseService.uuid();
+    const id = uuid();
     const [searchable, setSearchable] = useState(false);
     const [displayLabel, setDisplayLabel] = useState('');
     const [displayValue, setDisplayValue] = useState('');
@@ -75,7 +76,7 @@ const PiSelectList = (props: any) => {
             dark:divide-gray-600
             select-list-container shadow-2xl ${id} hidden`}>
                 {(data.length > 0) && data.map( (item: any) =>
-                    <div onClick={(() => selectItem(item))} className={`p-2 cursor-pointer dark:hover:bg-gray-600 hover:bg-gray-200 ${displayValue === item[props.dataValue] && 'bg-gray-600'}`}
+                    <div onClick={(() => selectItem(item))} className={`p-2 cursor-pointer dark:hover:bg-gray-600 hover:bg-gray-200 ${displayValue === item[props.dataValue] && 'bg-gray-200'}`}
                         key={item[props.dataValue]}>
                         <span className="text-[14px] leading-[16px] font-[400]">{item[props.dataLabel]}</span>
                     </div> ) }

@@ -1,15 +1,12 @@
-import {Component} from "react";
 import ReactDOM from "react-dom";
 import 'primeicons/primeicons.css';
-export class PiDrawer extends Component<any, any>{
-    render() {
-        return (
-            <>
-                {ReactDOM.createPortal(<BackDrop onClose={this.props.onClose}/>, document.body)}
-                {ReactDOM.createPortal(<Drawer position={this.props.position} width={this.props.width} title={this.props.title} onClose={this.props.onClose}>{this.props.children}</Drawer>, document.body)}
-            </>
-        );
-    }
+export const PiDrawer = (props: any) => {
+    return (
+        <>
+            {ReactDOM.createPortal(<BackDrop onClose={props.onClose}/>, document.body)}
+            {ReactDOM.createPortal(<Drawer position={props.position} width={props.width} title={props.title} onClose={props.onClose}>{props.children}</Drawer>, document.body)}
+        </>
+    );
 }
 
 const BackDrop = (props: any) => {
