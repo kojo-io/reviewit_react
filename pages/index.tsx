@@ -114,8 +114,7 @@ export default function Home() {
                                                     onChange={emailInputOnChange}
                                                     required={true}
                                                     type={'email'}
-                                                    placeholder={'Your email'} id={'email'}>
-                                                </PiInput>
+                                                    placeholder={'Your email'} id={'email'}/>
                                             </div>
                                             <div>
                                                 <PiInput
@@ -126,8 +125,7 @@ export default function Home() {
                                                     value={loginForm.password}
                                                     onChange={passwordInputOnChange}
                                                     type={'password'}
-                                                    placeholder={'Your password'} id={'password'}>
-                                                </PiInput>
+                                                    placeholder={'Your password'} id={'password'}/>
                                             </div>
                                             <div>
                                                 <PiButton onClick={loginHandler}>

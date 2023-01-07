@@ -16,6 +16,8 @@ import {AuthContext} from "../store/auth-provider";
 import {TokenModel} from "../models/TokenModel";
 import {Organisation} from "../models/Organisation";
 import {ContextInterface} from "../models/context-interface";
+import {PiRating} from "../shared/pi-rating";
+import {PiButton} from "../shared/pi-button";
 
 export default function OrgReviewItems() {
     const url = environment.apiUrl;
@@ -225,9 +227,17 @@ export default function OrgReviewItems() {
                                                             </div>
                                                         </div>
                                                         <img src={review.image ?? '/img-placeholder.png'} className={'min-w-full h-auto'}/>
-                                                        <div className={'w-full p-3'}>
-                                                            <span>{}</span>
+                                                        <div className={'w-full p-3 flex justify-between items-center'}>
+                                                            <div className={'flex space-x-2'}>
+                                                                <span className={'text-gray-300 text-3xl font-bold'}>4.0</span>
+                                                                <div>
+                                                                    <PiRating disabled={true} size={'small'} value={4} onChange={() => {}}/>
+                                                                    <span className={'text-[13px] pl-1 block'}>70 reviews</span>
+                                                                </div>
+                                                            </div>
+                                                            <PiButton onClick={() => {}}>LEAVE A REVIEW</PiButton>
                                                         </div>
+                                                        <div></div>
                                                     </div>
                                                 )
                                             }
