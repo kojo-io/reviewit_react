@@ -7,6 +7,6 @@ export interface User {
     id: string;
     image: string;
     lastName: string;
-    organization: Organisation;
-    role: Role;
+    organization?: Organisation;
+    role?: Role;
 }

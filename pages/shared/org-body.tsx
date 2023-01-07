@@ -32,8 +32,8 @@ export const OrgBody = (props: any) => {
                         <div className="lg:block max-lg:hidden w-full h-full">
                             <div className="w-full h-full flex justify-between">
                                 <div className="h-full flex space-x-5">
-                                    <h1 className="h-full flex flex-wrap content-center text-2xl font-bold uppercase leading-3 text-gray-600 dark:text-white">
-                                        {context?.user?.organization.name}
+                                    <h1 className="h-full flex flex-wrap content-center text-2xl font-bold leading-3 text-gray-600 dark:text-white">
+                                       Review.it
                                     </h1>
                                 </div>
 

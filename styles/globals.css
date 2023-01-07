@@ -22,3 +22,39 @@ body {
     color-scheme: dark;
   }
 }
+
+*::-webkit-scrollbar-track
+{
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar
+{
+  width: 5px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb
+{
+  background-color: #bfbfbf;
+  border: 2px solid #bfbfbf;
+}
+
+
+
+.feed::-webkit-scrollbar-track
+{
+  display: none !important;
+}
+
+.feed::-webkit-scrollbar
+{
+  width: 0;
+  background-color: transparent;
+}
+
+.feed::-webkit-scrollbar-thumb
+{
+  background-color: transparent;
+  border: none;
+}

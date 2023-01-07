@@ -11,21 +11,32 @@ import {BaseService} from "../shared/base.service";
 import {PiModal} from "../shared/pi-modal";
 import {Filter} from "../models/filter";
 import {ReviewItem} from "../models/review item";
+import {PiTruncate} from "../shared/pi-truncate";
+import {AuthContext} from "../store/auth-provider";
+import {TokenModel} from "../models/TokenModel";
+import {Organisation} from "../models/Organisation";
+import {ContextInterface} from "../models/context-interface";
 
 export default function OrgReviewItems() {
     const url = environment.apiUrl;
+    const context = useContext(AuthContext);
 
-    const getDefault: LoginResponseModel = { accesstoken: undefined, user: undefined };
+    const dummy= '';
 
-    const [auth, setAuth] = useState<LoginResponseModel>(getDefault);
+    const getDefault: ContextInterface = {
+        canLogout: () => {},
+        canLogin: () => {},
+        isAuthenticated: false }
 
-    const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+    const [auth, setAuth] = useState<ContextInterface>(getDefault);
+
+    const [openModal, setOpenModal] = useState<boolean>(false);
 
     const [filter, setFilter] = useState<Filter>({ pageSize: 10, pageNumber: 1 });
 
     const [itemType, setItemType] = useState<ItemType[]>();
 
-    const [reviews, setReviews] = useState<ReviewItem[]>()
+    const [reviews, setReviews] = useState<ReviewItem[]>([])
 
     const [editState, setEditState] = useState<boolean>(false);
 
@@ -34,7 +45,7 @@ export default function OrgReviewItems() {
     const editForm = (form: ReviewItem) => {
         setReviewItem(form);
         setEditState(true);
-        setOpenDrawer(true);
+        setOpenModal(true);
     }
 
     const messageDialog: MessageProps = {
@@ -45,11 +56,11 @@ export default function OrgReviewItems() {
 
     const [openDialog, setOpenDialog] = useState(messageDialog);
     const openDrawerHandler = () => {
-        setOpenDrawer(true);
+        setOpenModal(true);
     }
 
     const closeDrawerHandler = () => {
-        setOpenDrawer(false);
+        setOpenModal(false);
     }
 
     const openMessageHandler = (options: MessageProps) => {
@@ -97,18 +108,37 @@ export default function OrgReviewItems() {
     }
 
     const saveForm = (form: ReviewItem) => {
-        console.log('ff', form);
+        fetch(`${url}ReviewItems`, {
+            method: 'POST',
+            body: JSON.stringify(form),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth?.accesstoken?.token}`
+            }
+        }).then((response) => {
+            response.json().then((result: ApiResponse<any>) => {
+                if (result.status === 100) {
+                    getAllReviewItems();
+                    setOpenModal(false);
+                    openMessageHandler({type: "success", message: result.message, open: true});
+                } else {
+                    openMessageHandler({type: "error", message: result.message, open: true});
+                }
+            });
+
+        }).catch((reason) => {
+            openMessageHandler({type: "error", message: 'something went wrong please try again', open: true});
+        });
     }
 
+    // check token
     useEffect(() => {
-        let accessObj: LoginResponseModel = JSON.parse(localStorage.getItem(BaseService.key) as string) as LoginResponseModel;
-        if (accessObj) {
-            setAuth((prevState) => {
-                return {...prevState, user: accessObj.user, accesstoken: accessObj.accesstoken }
-            });
-        }
-    }, []);
+        setAuth((prevState) => {
+            return {...prevState, user: context.user, accesstoken: context.accesstoken }
+        });
+    }, [context]);
 
+    // update auth value
     useEffect(() => {
         if (auth.accesstoken?.token) {
             getAllReviewItems();
@@ -116,13 +146,14 @@ export default function OrgReviewItems() {
         }
     }, [auth]);
 
+    // update reviews value
     useEffect(() => {
     }, [reviews]);
 
     return(
         <>
             {
-                openDrawer &&
+                openModal &&
                 <PiModal fullScreen={false} onClose={closeDrawerHandler}>
                     <OrgReviewForm onFormSubmit={saveForm} editState={editState} formData={reviewItem} listData={itemType}/>
                 </PiModal>
@@ -134,24 +165,72 @@ export default function OrgReviewItems() {
 
                             <div className="grid lg:grid-cols-7 gap-4 h-full">
 
-                                <div className={'lg:columns-1 lg:col-span-2 max-lg:hidden'}></div>
+                                <div className={'lg:columns-1 lg:col-span-2 max-lg:hidden p-4'}>
+                                    <div className={'w-full dark:bg-gray-800 border dark:border-gray-800 rounded-xl p-4'}>
+                                        <img src={context?.user?.organization?.image ?? `/user.png`} className={'block border m-auto w-[100px] h-[100px] p-1 rounded-full'}/>
+                                        <span className={'block text-2xl text-center mt-4'}>
+                                            {context.user?.organization?.name}
+                                        </span>
+                                        <span className={'block text-lg dark:text-gray-500 text-center mt-1'}>
+                                            {context.user?.organization?.address}
+                                        </span>
+                                        <span className={'block text-lg dark:text-gray-500 text-center mt-1'}>
+                                            {context.user?.organization?.phoneNumber}
+                                        </span>
+                                    </div>
+                                </div>
 
                                 {/*review feed start*/}
-                                <div className="grow h-full overflow-auto lg:columns-3 lg:col-span-3 flex">
+                                <div className="grow h-full overflow-auto lg:columns-3 lg:col-span-3 flex feed">
                                     <div className={'h-full flex flex-col w-full p-4'}>
                                         <div className={'rounded-2xl w-full dark:bg-gray-800 border dark:border-gray-800 bg-white'}>
-                                            <div className={'p-4'} onClick={openDrawerHandler}>
+                                            <div className={'p-4'}>
                                                 <label className={'pb-2 block'}>Create Review</label>
-                                                <PiTextrea rows={2} readOnly={true} onChange={() => {}}/>
+                                                <div onClick={openDrawerHandler}>
+                                                    <PiTextrea rows={2} readOnly={true} onChange={() => {}} id={'dummy'} value={dummy}/>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="w-full justify-center flex flex-wrap h-full content-center">
-                                            <div className="space-y-3">
-                                                <img src="/empty-folder.png" className="w-48 h-48 m-auto"  alt='empty-folder'/>
-                                                <span className="w-72 block text-center font-bold leading-[16px]">
-                                                You do not have any items set up for review, please click on the add review item button to start.
-                                            </span>
-                                            </div>
+                                        <div className={'py-4 space-y-4'}>
+                                            {
+                                                reviews.length === 0 &&
+                                                <div className="w-full justify-center flex flex-wrap h-full content-center">
+                                                    <div className="space-y-3">
+                                                        <img src="/empty-folder.png" className="w-48 h-48 m-auto"  alt='empty-folder'/>
+                                                        <span className="w-72 block text-center font-bold leading-[16px]">
+                                                            You do not have any items set up for review, please click on the add review item button to start.
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            }
+                                            {
+                                                reviews.length > 0 &&
+                                                reviews.map((review) =>
+                                                    <div key={review.id} className={'dark:bg-gray-800 border overflow-hidden dark:border-gray-800 rounded-2xl w-full over'}>
+                                                        <div className={'divide-y dark:divide-gray-700'}>
+                                                            <div className={'w-full p-3 flex items-center space-x-3'}>
+                                                                <img src={context?.user?.organization?.image ?? `/user.png`} className={'w-[40px] h-[40px] rounded-full'}/>
+                                                                <div>
+                                                                    <span className={'font-bold'}>{context.user?.organization?.name}</span>
+                                                                    <p className={'text-xs dark:text-gray-500 uppercase'}>
+                                                                        {review.reviewType?.name} REVIEW
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div className={'w-full p-3'}>
+                                                                <span className={'font-bold'}>{review.name}</span>
+                                                                <p className={'text-[14px] dark:text-gray-400'}>
+                                                                    <PiTruncate text={review.description}/>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <img src={review.image ?? '/img-placeholder.png'} className={'min-w-full h-auto'}/>
+                                                        <div className={'w-full p-3'}>
+                                                            <span>{}</span>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>

@@ -13,6 +13,10 @@ export default function Home() {
     const router = useRouter();
     const [loginForm, setLoginValues] = useState({userName: '', password: ''});
 
+    const [inValidEmail, setInValidEmail] = useState<boolean>(false);
+    const [inValidPassword, setInValidPassword] = useState<boolean>(false);
+
+
     const messageDialog: MessageProps = {
         open: false,
         message: '',
@@ -21,6 +25,18 @@ export default function Home() {
     const [openDialog, setOpenDialog] = useState(messageDialog);
 
     const loginHandler = async () => {
+        let errorCount = 0;
+        if (!loginForm.userName) {
+            errorCount ++;
+            setInValidEmail(true);
+        }
+        if (!loginForm.password) {
+            errorCount ++;
+            setInValidPassword(true);
+        }
+        if (errorCount > 0) {
+            return;
+        }
         const url = environment.apiUrl;
         try {
             const response = await fetch(`${url}Account/AccountLogin`, {
@@ -46,7 +62,7 @@ export default function Home() {
 
     const emailInputOnChange = (event: any) => {
         setLoginValues((prevState) => {
-            return {...prevState, userName: event.target.value}
+            return {...prevState, userName: event}
         });
     }
 
@@ -64,7 +80,7 @@ export default function Home() {
 
     const passwordInputOnChange = (event: any) => {
         setLoginValues((prevState) => {
-            return {...prevState, password: event.target.value}
+            return {...prevState, password: event}
         });
     }
 
@@ -91,22 +107,26 @@ export default function Home() {
                                             <h1 className={'font-bold text-xl'}>Sign in with your email</h1>
                                             <div>
                                                 <PiInput
+                                                    name={'Email'}
+                                                    invalid={inValidEmail}
                                                     label={'Enter your email'}
                                                     value={loginForm.userName}
                                                     onChange={emailInputOnChange}
                                                     required={true}
                                                     type={'email'}
-                                                    placeholder={'Your email'}>
+                                                    placeholder={'Your email'} id={'email'}>
                                                 </PiInput>
                                             </div>
                                             <div>
                                                 <PiInput
+                                                    name={'Password'}
+                                                    invalid={inValidPassword}
                                                     label={'Enter your password'}
                                                     required={true}
                                                     value={loginForm.password}
                                                     onChange={passwordInputOnChange}
                                                     type={'password'}
-                                                    placeholder={'Your password'}>
+                                                    placeholder={'Your password'} id={'password'}>
                                                 </PiInput>
                                             </div>
                                             <div>

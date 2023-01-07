@@ -1,8 +1,29 @@
 import React, {useEffect, useReducer, useRef, useState} from "react";
 import {uuid} from "./base.service";
 
-const PiImagePicker = (props: any) => {
+interface Props {
+    label?: string;
+    required?: boolean;
+    placeholder?: string;
+    onImageAdded: (event: any) => void;
+    invalid?: boolean;
+    type: 'single' | 'multiple';
+    output?: 'file' | 'base64';
+    files?:any;
+}
+const PiImagePicker = (props: Props) => {
     const id = uuid();
+
+    const ele = document.getElementById(id)
+    const imageInputRef = useRef<HTMLInputElement>(ele as HTMLInputElement);
+    const [inputTouched, setInputTouched] = useState<boolean>(false);
+    const [inputIsValid, setInputIsValid] = useState<boolean>(false);
+    const defaultClass = '"w-full border border-dashed h-auto divide-y rounded-lg';
+    const inputValidClass = 'border-gray-500 ';
+    const invalidClass = 'border-red-600'
+    const [inputClass, setInputClass] = useState(defaultClass);
+    const [inputIsInValid, setInputIsInValid] = useState<boolean | undefined>(false);
+
 
     const fileReducer = (state: any, action: any) => {
         if (action.type === 'images') {
@@ -14,9 +35,6 @@ const PiImagePicker = (props: any) => {
     const [filesState, dispatchFiles] = useReducer(fileReducer, {
         images: []
     })
-
-    const ele = document.getElementById(id);
-    const imageInputRef = useRef<HTMLInputElement>(ele as HTMLInputElement);
 
     const singleFileSelected = (file: any) => {
         const image: Array<any> = [];
@@ -47,9 +65,14 @@ const PiImagePicker = (props: any) => {
     }
 
     useEffect(() => {
+        if (filesState.images.length > 0) {
+            setInputIsValid(true);
+
+        } else{
+            setInputIsValid(false);
+        }
         props.onImageAdded(filesState.images);
     }, [filesState]);
-
 
     const multipleFilesSelected = (file: any) => {
         let i = 0;
@@ -82,6 +105,15 @@ const PiImagePicker = (props: any) => {
     }
 
     const selectFiles = (file: any) => {
+        if (file.target.files.length > 0) {
+            setInputTouched(true);
+        }
+        if (file.target.files.length === 0) {
+            setInputIsValid(false);
+        } else {
+            setInputIsValid(true);
+        }
+
         if (props.type === 'single') {
             singleFileSelected(file);
         } else {
@@ -105,19 +137,31 @@ const PiImagePicker = (props: any) => {
             imageInputRef.current.value = '';
         }
         dispatchFiles({type: 'images', images: image});
-        // setFiles(image);
     }
 
+    useEffect(() => {
+        setInputIsInValid(props.invalid);
+    }, [props.invalid]);
+
+    useEffect(() => {
+        setInputIsInValid(!inputIsValid && inputTouched);
+    }, [inputIsValid]);
     return (
         <>
             {
                 props.label &&
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     {props.label}
+                    {
+                        props.required &&
+                        <>
+                            <span className={'text-red-600 text-lg'}>*</span>
+                        </>
+                    }
                 </label>
             }
             <input id={id} accept={'image/*'} hidden ref={imageInputRef} multiple={props.type === 'multiple'} type="file" onChange={(e) => selectFiles(e)} />
-            <div className="w-full border border-dashed border-gray-500 h-auto divide-y rounded-lg">
+            <div className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass}`}>
                 <div className="flex flex-wrap content-center justify-center w-full cursor-pointer h-36" onClick={selectImage}>
                     {filesState.images.length > 0 &&
                         <div className="overflow-x-auto flex space-x-3 p-2 h-full items-center">
@@ -133,7 +177,7 @@ const PiImagePicker = (props: any) => {
                     {filesState.images.length === 0 &&
                         <div className="text-center">
                             <i className="pi pi-images text-5xl text-gray-400"></i>
-                            <span className="block cursor-pointer">click to select image</span>
+                            <span className="block cursor-pointer">{ props.placeholder ?? 'click to select image'}</span>
                         </div>
                     }
                 </div>
@@ -146,6 +190,15 @@ const PiImagePicker = (props: any) => {
                     }
                 </div>
             </div>
+            {
+                inputIsInValid &&
+                <>
+                    {
+                        props.required &&
+                        <small className={'text-red-600'}>{props.label} is required *</small>
+                    }
+                </>
+            }
         </>
     )
 }
