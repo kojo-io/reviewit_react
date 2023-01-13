@@ -13,6 +13,7 @@ export interface ReviewItem {
     active: boolean;
     allowPhoto?: boolean;
     organisation?: any;
+    ratingAverage?: any;
 }
 
 export interface ReviewItemForm {

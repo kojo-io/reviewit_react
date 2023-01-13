@@ -6,13 +6,14 @@ import {useRouter} from "next/router";
 
 export const AuthContext = React.createContext<ContextInterface>({
     canLogout: () => {},
-    canLogin: () => {},
+    canLogin: (value: LoginResponseModel) => {},
     isAuthenticated: false });
+
 export const AuthProvider = (props: any) => {
     const router = useRouter();
-    const loginHandler = () => {
+    const loginHandler = (value: LoginResponseModel) => {
         setAuth((prevState) => {
-            return {...prevState, isAuthenticated: true}
+            return {...prevState, isAuthenticated: true, accesstoken: value.accesstoken, user: value.user}
         })
     }
 
@@ -38,7 +39,6 @@ export const AuthProvider = (props: any) => {
                     router.push('/').then();
                 }
             }, 3000);
-
             setState((prevState) => {
                 return { ...prevState, accesstoken: accessObj.accesstoken, isAuthenticated: true, canLogin: loginHandler, canLogout: logOutHandler, user: accessObj.user }
             });
@@ -47,6 +47,7 @@ export const AuthProvider = (props: any) => {
     }, [auth]);
 
     useEffect(() => {
+        // console.log('state', state);
     }, [state])
 
     return (

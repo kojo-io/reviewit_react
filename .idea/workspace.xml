@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="02eef49e-2994-4e76-935a-940a9a3c445d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/admin/organization/[organizationId].tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/organization/[organizationId]/users.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/organization/review/[reviewId].tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/organizations.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/forms/organization-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/forms/organization-user-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/models/PagedResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/models/paging.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/organization/org-review-items.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/organization/review/[reviewId].tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/organization/sign-in.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/PiDropdown.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/admin-body.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/pi-icon-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/pi-loading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/pi-skeleton-wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/pi-skeleton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/rating.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/unauthorized.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/reviewit_react.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/models/Organisation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/Organization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/models/context-interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/context-interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/models/filter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/filter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/models/review item.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/review item.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/organisation/org-dashboard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/organisation/org-review-form/org-review-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/org-review-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/organisation/org-review-items.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/base.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/base.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/org-body.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/org-body.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-image-picker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-image-picker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-rating.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-rating.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-select-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-select-list.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-textrea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-textrea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/store/auth-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/store/auth-provider.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2JVQuqDu6SRxC8DwvoFaNFzTq2Z" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/macde/Documents/react/reviewit_react/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\macde\\Documents\\react\\reviewit_react\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\pages" />
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\pages\organization" />
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\pages\forms" />
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\pages\admin\posts" />
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\pages\organisation\review" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02eef49e-2994-4e76-935a-940a9a3c445d" name="Changes" comment="" />
+      <created>1672161001819</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1672161001819</updated>
+      <workItem from="1672161003495" duration="3245000" />
+      <workItem from="1672182272323" duration="11177000" />
+      <workItem from="1672288815754" duration="11266000" />
+      <workItem from="1672441350082" duration="4274000" />
+      <workItem from="1672468944274" duration="67532000" />
+      <workItem from="1672811844135" duration="18357000" />
+      <workItem from="1672871872514" duration="70129000" />
+      <workItem from="1673082144540" duration="5621000" />
+      <workItem from="1673141331211" duration="2557000" />
+      <workItem from="1673145731061" duration="596000" />
+      <workItem from="1673167802936" duration="24757000" />
+      <workItem from="1673265673496" duration="12935000" />
+      <workItem from="1673286942123" duration="631000" />
+      <workItem from="1673292854075" duration="9016000" />
+      <workItem from="1673330722613" duration="26066000" />
+      <workItem from="1673405014515" duration="3616000" />
+      <workItem from="1673436174533" duration="6351000" />
+      <workItem from="1673464481174" duration="6807000" />
+      <workItem from="1673497674991" duration="8008000" />
+      <workItem from="1673527158257" duration="15400000" />
+      <workItem from="1673557849830" duration="779000" />
+      <workItem from="1673559708830" duration="1933000" />
+      <workItem from="1673584539963" duration="594000" />
+      <workItem from="1673604045779" duration="14046000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

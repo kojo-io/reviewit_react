@@ -74,7 +74,7 @@ const PiInput = (props: Props) => {
                 <>
                     {
                         props.required &&
-                        <small className={'text-red-600'}>{props.name ?? props.label} is required *</small>
+                        <small className={'text-red-600'}>{props.name ?? props.label} is required</small>
                     }
                 </>
             }

@@ -1,4 +1,4 @@
-import {Organisation} from "./Organisation";
+import {Organization} from "./Organization";
 import {Role} from "./Role";
 
 export interface User {
@@ -7,6 +7,7 @@ export interface User {
     id: string;
     image: string;
     lastName: string;
-    organization?: Organisation;
+    organisationId?: string;
+    organization?: Organization;
     role?: Role;
 }

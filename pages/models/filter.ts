@@ -1,4 +1,4 @@
-export interface Filter {
-    pageSize: number;
-    pageNumber: number;
+export interface Filter{
+    search?: string;
+    organizationId?: string
 }

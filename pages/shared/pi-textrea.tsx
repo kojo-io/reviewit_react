@@ -11,6 +11,7 @@ interface Props {
     required?: boolean;
     readOnly?: boolean;
     invalid?: boolean;
+    resize?: boolean;
 }
 const PiTextrea = (props: Props) => {
     const [inputTouched, setInputTouched] = useState<boolean>(false);
@@ -66,7 +67,7 @@ const PiTextrea = (props: Props) => {
                       onChange={inputChangeHandler}
                       value={props.value}
                       readOnly={props.readOnly}
-                      className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass}`}
+                      className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass} ${props.resize ? 'resize-y' : 'resize-none'}`}
                       placeholder={props.placeholder} required={props.required}></textarea>
             {
                 inputIsInValid &&

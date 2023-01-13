@@ -1,8 +1,7 @@
-export interface Organisation{
+export interface Organization {
     address: string;
     id: string;
     image: string;
-    imageId: string;
     name: string;
     phoneNumber: string;
 }

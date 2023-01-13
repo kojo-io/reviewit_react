@@ -8,11 +8,12 @@ import {LoginResponseModel} from "./models/LoginResponseModel";
 import {MessageProps, PiMessage} from "./shared/pi-message";
 import {environment} from "./shared/environment";
 import {BaseService} from "./shared/base.service";
+import {PiLoading} from "./shared/pi-loading";
 
 export default function Home() {
     const router = useRouter();
     const [loginForm, setLoginValues] = useState({userName: '', password: ''});
-
+    const [loading, setLoading] = useState<boolean>(false);
     const [inValidEmail, setInValidEmail] = useState<boolean>(false);
     const [inValidPassword, setInValidPassword] = useState<boolean>(false);
 
@@ -25,6 +26,7 @@ export default function Home() {
     const [openDialog, setOpenDialog] = useState(messageDialog);
 
     const loginHandler = async () => {
+        setLoading(true);
         let errorCount = 0;
         if (!loginForm.userName) {
             errorCount ++;
@@ -38,26 +40,30 @@ export default function Home() {
             return;
         }
         const url = environment.apiUrl;
-        try {
-            const response = await fetch(`${url}Account/AccountLogin`, {
-                method: 'POST',
-                body: JSON.stringify(loginForm),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            const result = await response.json() as ApiResponse<LoginResponseModel>;
-            if (result.status === 100) {
-                // openMessageHandler({type: "success", message: result.message, open: true});
-                BaseService.setSessionData(result.data);
-                router.push('/organisation/org-dashboard').then();
-            } else {
-                openMessageHandler({type: "error", message: result.message, open: true});
+        fetch(`${url}Account/AccountLogin`, {
+            method: 'POST',
+            body: JSON.stringify(loginForm),
+            headers: {
+                'Content-Type': 'application/json'
             }
-        } catch (e: any) {
-            openMessageHandler({type: "error", message: e.statusMessage, open: true});
-        }
+        }).then((response) => {
+            response.json().then((result: ApiResponse<LoginResponseModel>) => {
+                if (result.status === 100) {
+                    // openMessageHandler({type: "success", message: result.message, open: true});
+                    BaseService.setSessionData(result.data);
+                    if (result.data.user?.role?.name === 'ORGANISATION') {
+                        router.push('/organization/org-review-items').then();
+                    }
+                    if (result.data.user?.role?.name.toUpperCase() === 'SYSTEM ADMINISTRATOR') {
+                        router.push('/admin/organizations').then();
+                    }
+                } else {
+                    openMessageHandler({type: "error", message: result.message, open: true});
+                }
+            }).catch((e) => {
+                openMessageHandler({type: "error", message: e.statusMessage, open: true});
+            }).finally(() => setLoading(false))
+        });
     }
 
     const emailInputOnChange = (event: any) => {
@@ -128,7 +134,7 @@ export default function Home() {
                                                     placeholder={'Your password'} id={'password'}/>
                                             </div>
                                             <div>
-                                                <PiButton onClick={loginHandler}>
+                                                <PiButton loading={loading} type={'primary'} size={'normal'} rounded={'rounded'} onClick={loginHandler}>
                                                     Submit
                                                 </PiButton>
                                             </div>
@@ -145,7 +151,7 @@ export default function Home() {
                                     </label>
                                     <h1 className={'font-bold flex justify-end space-x-2'}>
                                         <span>Powered by</span>
-                                        <img src="/tollesoft.png" className={'w-24 h-[18px]'}  alt={'tollesoft.png'}/>
+                                        <img src="/tollesoft.png" className={'w-24 h-[18px]'} alt={'tollesoft.png'}/>
                                     </h1>
                                 </div>
                             </div>

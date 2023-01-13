@@ -5,11 +5,10 @@ import Head from "next/head";
 import {useRouter} from "next/router";
 import {AuthContext} from "../store/auth-provider";
 import {LoginResponseModel} from "../models/LoginResponseModel";
-import {PiDropdown} from "./PiDropdown";
 import {PiButton} from "./pi-button";
 
 
-export const OrgBody = (props: any) => {
+export const AdminBody = (props: any) => {
     const context = useContext(AuthContext);
     const router = useRouter();
     const [collapse, setCollapse] = useState<boolean>(true);
@@ -26,7 +25,7 @@ export const OrgBody = (props: any) => {
         if (!data) {
             router.push('/');
         } else {
-            if ((data as LoginResponseModel).user?.role?.name !== 'ORGANISATION') {
+            if ((data as LoginResponseModel).user?.role?.name.toUpperCase() !== 'SYSTEM ADMINISTRATOR') {
                 BaseService.clearSessionData();
                 router.push('/');
             } else {
@@ -51,18 +50,9 @@ export const OrgBody = (props: any) => {
                             <div className="w-full h-full flex justify-between">
                                 <div className="h-full flex space-x-5">
                                     <h1 className="h-full flex flex-wrap content-center text-2xl font-bold leading-3 text-gray-600 dark:text-white">
-                                       Review.it
+                                        Review.it
                                     </h1>
                                 </div>
-
-                                {/*<div className="h-full flex space-x-3 text-gray-600 dark:text-white">*/}
-                                {/*    <a href={'/organization/org-dashboard'} className="h-full block flex cursor-pointer items-center hover:border-b-[3px] hover:border-blue-500 px-2" >*/}
-                                {/*        <span className="leading-3 cursor-pointer">Dashboard</span>*/}
-                                {/*    </a>*/}
-                                {/*    <a href={'/organization/org-review-items'} className="h-full block flex cursor-pointer items-center hover:border-b-[3px] hover:border-blue-500 px-2" >*/}
-                                {/*        <span className="leading-3 cursor-pointer">Review Items</span>*/}
-                                {/*    </a>*/}
-                                {/*</div>*/}
 
                                 <div className="h-full flex space-x-3">
                                     <div className="flex flex-wrap content-center">
@@ -92,7 +82,7 @@ export const OrgBody = (props: any) => {
                         </div>
                     </div>
 
-                    <div className="grow h-full overflow-auto feed">
+                    <div className="grow h-full overflow-auto">
                         {props.children}
                     </div>
                 </div>

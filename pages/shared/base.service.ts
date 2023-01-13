@@ -12,8 +12,25 @@ export class BaseService {
         localStorage.removeItem(this.key);
     }
 
+    static getSessionData = (): any => {
+        if (localStorage.getItem(this.key)) {
+            return JSON.parse(localStorage.getItem(this.key) as string);
+        }
+        return false;
+    }
+
     static getTimeLeft = (firstdate: any, seconddate: any) => {
         return Math.abs(new Date(firstdate).getTime() - new Date(seconddate).getTime())/1000;
+    }
+
+    static random_rgba = () => {
+        const o = Math.round, r = Math.random, s = 255;
+        const color = 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + ' 1.0)';
+        if (color === 'rgba(0, 0, 0, 1.0)') {
+            this.random_rgba();
+        } else {
+            return color;
+        }
     }
 }
 export const uuid = () => {

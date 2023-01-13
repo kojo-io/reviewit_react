@@ -11,17 +11,17 @@ interface Props {
     onValueChange: (event: any) => void;
     readOnly?: boolean;
     invalid?: boolean;
-    data: any;
+    data: Array<any>;
     dataValue: string;
     dataLabel: string;
     allowSearch?: boolean;
+    value?: any;
 }
 const PiSelectList = (props: Props) => {
     const id = uuid();
     const [searchable, setSearchable] = useState(false);
     const [displayLabel, setDisplayLabel] = useState<string>('');
     const [displayValue, setDisplayValue] = useState<any>('');
-    const data = props.data;
 
     const ele = document.getElementById(id)
     const inputRef = useRef<HTMLInputElement>(ele as HTMLInputElement);
@@ -34,7 +34,7 @@ const PiSelectList = (props: Props) => {
     const [inputIsInValid, setInputIsInValid] = useState<boolean | undefined>(false);
 
     const selectItem = (item: any) => {
-        const find = data.find((u: any) => u === item);
+        const find = props.data.find((u: any) => u === item);
         if (find) {
             setDisplayValue(find[props.dataValue]);
             setDisplayLabel(find[props.dataLabel]);
@@ -55,13 +55,20 @@ const PiSelectList = (props: Props) => {
 
     useEffect(() => {
         setInputIsValid(!displayValue);
-        console.log('ggg', displayValue);
         props.onValueChange(displayValue);
     }, [displayValue]);
 
     useEffect(() => {
         setInputIsValid(!displayLabel);
     }, [displayLabel]);
+
+    useEffect(() => {
+        const find = props.data.find((u: any) => u[props.dataValue] === props.value);
+        if (find) {
+            setDisplayValue(find[props.dataValue]);
+            setDisplayLabel(find[props.dataLabel]);
+        }
+    }, [props.data, props.value, props.dataValue])
 
     useEffect(() => {
         const event = (event: MouseEvent) => {
@@ -144,13 +151,13 @@ const PiSelectList = (props: Props) => {
             dark:border-gray-600
             dark:divide-gray-600
             select-list-container overflow-auto shadow-2xl ${id} hidden`}>
-                {(data.length > 0) && data.map( (item: any) =>
+                {(props.data.length > 0) && props.data.map( (item: any) =>
                     <div onClick={(() => selectItem(item))} className={`p-2 cursor-pointer dark:hover:bg-gray-600 hover:bg-gray-200 ${displayValue === item[props.dataValue] && 'bg-gray-200 dark:bg-gray-600'}`}
                          key={item[props.dataValue]}>
                         <span className="text-[14px] leading-[16px] font-[400]">{item[props.dataLabel]}</span>
                     </div> ) }
                 {
-                    (data.length === 0 &&
+                    (props.data.length === 0 &&
                         <div>
                             <div className="py-6 cursor-pointer text-center">
                                 <span className="text-[14px] leading-[16px] font-[400]">List is empty</span>

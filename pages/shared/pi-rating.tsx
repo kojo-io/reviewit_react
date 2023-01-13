@@ -4,7 +4,7 @@ interface Props {
     disabled?: boolean;
     size: 'small'|'default'|'large';
     value: number;
-    onChange: (event: any) => void;
+    onChange?: (event: any) => void;
 }
 export const PiRating = (props: Props) => {
     const range = [1, 2, 3, 4, 5];
