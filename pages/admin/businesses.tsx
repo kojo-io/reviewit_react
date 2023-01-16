@@ -16,7 +16,7 @@ import {PagedResponse} from "../models/PagedResponse";
 import {Filter} from "../models/filter";
 import {PiButton} from "../shared/pi-button";
 
-export default function Organizations() {
+export default function Businesses() {
     const url = environment.apiUrl;
     const context = useContext(AuthContext);
     const router = useRouter();
@@ -169,11 +169,11 @@ export default function Organizations() {
     }
 
     const organizationReviewsPostsHandler = (organizationId: any) => {
-        router.push(`/admin/organization/${organizationId}`);
+        router.push(`/admin/business/${organizationId}`);
     }
 
     const organizationUsersHandler = (organizationId: any) => {
-        router.push(`/admin/organization/${organizationId}/users`);
+        router.push(`/admin/business/${organizationId}/users`);
     }
 
     const loadMoreReviewsHandler = () => {

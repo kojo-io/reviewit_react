@@ -6,5 +6,7 @@ export interface Rating{
     date: Date;
     feedback: string;
     rating: number,
-    images: Array<any>
+    images: Array<any>,
+    notLoggedIn?:boolean;
+    user?: any;
 }

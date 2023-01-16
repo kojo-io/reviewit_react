@@ -43,18 +43,29 @@ const Message = (props: Props) => {
                    <div className={`modal-content text-center bg-white dark:bg-gray-800 space-y-4 p-5 w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12`}>
                        {
                            props.type === 'success' &&
-                           <i className="pi pi-check-circle text-5xl text-green-600"></i>
+                           <>
+                               <i className="pi pi-check-circle text-5xl text-green-600"></i>
+                               <span className={'block text-xl font-bold'}>{props.message}</span>
+                               <PiButton type={'primary'} size={'normal'} rounded={'rounded'} onClick={props.onClose}>Continue</PiButton>
+                           </>
+
                        }
                        {
                            props.type === 'error' &&
-                           <i className="pi pi-times-circle text-5xl text-red-700"></i>
+                           <>
+                               <i className="pi pi-times-circle text-5xl text-red-700"></i>
+                               <span className={'block text-xl font-bold'}>{props.message}</span>
+                               <PiButton type={'danger'} size={'normal'} rounded={'rounded'} onClick={props.onClose}>Continue</PiButton>
+                           </>
                        }
                        {
                            props.type === 'warning' &&
-                           <i className="pi pi-exclamation-triangle text-5xl text-yellow-500"></i>
+                           <>
+                               <i className="pi pi-exclamation-triangle text-5xl text-yellow-500"></i>
+                               <span className={'block text-xl font-bold'}>{props.message}</span>
+                               <PiButton type={'warning'} size={'normal'} rounded={'rounded'} onClick={props.onClose}>Continue</PiButton>
+                           </>
                        }
-                       <span className={'block text-xl font-bold'}>{props.message}</span>
-                       <PiButton onClick={props.onClose}>Continue</PiButton>
                    </div>
                </div>
            </div>

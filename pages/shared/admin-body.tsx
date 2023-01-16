@@ -38,7 +38,7 @@ export const AdminBody = (props: any) => {
     return (
         <>
             <Head>
-                <title>Review It</title>
+                <title>Review It | Admin</title>
                 <meta name="description" content="Powered by Tollesoft" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
@@ -112,11 +112,11 @@ export const AdminBody = (props: any) => {
                         <div className="grow h-full">
                             <div className="text-gray-600 dark:text-white w-full pl-2">
                                 <a className="block w-full cursor-pointer hover:border-r-[3px] hover:border-blue-500 py-2"
-                                   href={'/organization/org-dashboard'}>
+                                   href={'/business/org-dashboard'}>
                                     <span className="leading-3 cursor-pointer">Dashboard</span>
                                 </a>
                                 <a className="block w-full cursor-pointer hover:border-r-[3px] hover:border-blue-500 py-2"
-                                   href={'/organization/org-review-items'}>
+                                   href={'/business/org-review-items'}>
                                     <span className="leading-3 cursor-pointer">Review Items</span>
                                 </a>
                             </div>

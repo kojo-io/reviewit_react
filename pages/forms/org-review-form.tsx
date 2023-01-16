@@ -3,10 +3,10 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import PiSelectList from "../shared/pi-select-list";
 import PiTextrea from "../shared/pi-textrea";
 import PiImagePicker from "../shared/pi-image-picker";
-import PiCheckbox from "../shared/pi-checkbox";
 import {PiButton} from "../shared/pi-button";
 import {ReviewItem, ReviewItemForm} from "../models/review item";
 import {PiLoading} from "../shared/pi-loading";
+import {PiCheckbox} from "../shared/pi-checkbox";
 
 interface Props {
     editState: boolean;
@@ -24,7 +24,6 @@ const OrgReviewForm = (props: Props) => {
     const [inValidName, setInValidName] = useState<boolean>(false);
     const [inValidListData, setInValidListData] = useState<boolean>(false);
     const [inValidImage, setInValidImage] = useState<boolean>(false);
-
     const [image, setImage] = useState<{file: Array<{file: string}>}>({file: []});
 
     const getReviewType = (data: any) => {

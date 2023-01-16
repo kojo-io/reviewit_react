@@ -99,7 +99,7 @@ export const OrganizationUserForm  = (props: Props) => {
                         <PiInput value={form.email} label={'Email'} invalid={inValidEmail} required={true} id={'email'} onChange={emailInputOnChange}/>
                     </div>
                     {/*<div>*/}
-                    {/*    <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select organization logo'} onImageAdded={getFiles} files={image.file} />*/}
+                    {/*    <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select business logo'} onImageAdded={getFiles} files={image.file} />*/}
                     {/*</div>*/}
                     <div className="flex w-full">
                         <PiButton loading={props.loading} rounded={'rounded'} type={'primary'} size={'normal'} onClick={onSubmitHandler}>Submit</PiButton>

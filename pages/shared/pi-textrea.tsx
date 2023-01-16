@@ -12,18 +12,23 @@ interface Props {
     readOnly?: boolean;
     invalid?: boolean;
     resize?: boolean;
+    rounded?: 'rounded' | 'none'
 }
 const PiTextrea = (props: Props) => {
     const [inputTouched, setInputTouched] = useState<boolean>(false);
     const [inputIsValid, setInputIsValid] = useState<boolean>(false);
-    const defaultClass = 'bg-gray-50 focus:outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white';
+    const defaultClass = 'bg-gray-50 focus:outline-none text-gray-900 text-sm block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white';
     const inputValidClass = 'focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 border border-gray-300 dark:border-gray-600';
     const invalidClass = 'focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 border border-red-500 dark:border-red-600'
     const [inputClass, setInputClass] = useState(defaultClass);
     const [inputValue, setInputValue] = useState<string>(props.value);
+    const [inputEvent, setInputEvent] = useState<any>();
+    const [inputSelection, setInputSelection] = useState<number>(0);
     const [inputIsInValid, setInputIsInValid] = useState<boolean | undefined>(false);
     const inputChangeHandler = (event: any) => {
+        setInputEvent(event);
         setInputValue(event.target.value);
+        setInputSelection(event.target.selectionStart);
         if (event.target.value.length > 0) {
             setInputTouched(true);
         }
@@ -35,6 +40,9 @@ const PiTextrea = (props: Props) => {
     }
     useEffect(() => {
         setInputValue(props.value);
+        if (inputEvent) {
+            inputEvent.target.setSelectionRange(inputSelection, inputSelection);
+        }
     }, [props.value])
 
     useEffect(() => {
@@ -67,7 +75,9 @@ const PiTextrea = (props: Props) => {
                       onChange={inputChangeHandler}
                       value={props.value}
                       readOnly={props.readOnly}
-                      className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass} ${props.resize ? 'resize-y' : 'resize-none'}`}
+                      className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass} 
+                      ${props.resize ? 'resize-y' : 'resize-none'} 
+                      ${props.rounded === 'rounded' && 'rounded-lg'}`}
                       placeholder={props.placeholder} required={props.required}></textarea>
             {
                 inputIsInValid &&

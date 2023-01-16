@@ -5,46 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02eef49e-2994-4e76-935a-940a9a3c445d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/admin/organization/[organizationId].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/admin/organization/[organizationId]/users.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/admin/organization/review/[reviewId].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/admin/organizations.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/forms/organization-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/forms/organization-user-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/models/PagedResponse.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/models/paging.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/organization/org-review-items.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/organization/review/[reviewId].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/organization/sign-in.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/PiDropdown.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/admin-body.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/pi-icon-button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/pi-loading.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/pi-skeleton-wrapper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/pi-skeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shared/rating.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/unauthorized.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/reviewit_react.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/business/sign-in.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/reviews/[reviewId].tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/reviews/feed.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/logo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/pi-avatar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/shared/user-body.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/sign-in.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/organization/[organizationId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/business/[businessId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/organization/[organizationId]/users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/business/[businessId]/users.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/organization/review/[reviewId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/business/review/[reviewId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/organizations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/businesses.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forms/org-review-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/org-review-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forms/organization-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/organization-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forms/organization-user-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/organization-user-form.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/models/Organisation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/Organization.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/models/context-interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/context-interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/models/filter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/filter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/models/review item.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/review item.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/organisation/org-dashboard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/organisation/org-review-form/org-review-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/org-review-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/organisation/org-review-items.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/base.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/base.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/organization/org-review-items.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/business/business-review-items.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/organization/review/[reviewId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/business/review/[reviewId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/organization/sign-in.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/review-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/admin-body.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/admin-body.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/shared/org-body.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/org-body.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/pi-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-checkbox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-checkbox.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/shared/pi-image-picker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-image-picker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/shared/pi-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/pi-message.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-message.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/shared/pi-rating.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-rating.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/pi-select-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-select-list.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/shared/pi-textrea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-textrea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/store/auth-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/store/auth-provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shared/rating.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/rating.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/unauthorized.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/Rating.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +44,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
+        <option value="tsconfig.json" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -66,7 +57,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2JVQuqDu6SRxC8DwvoFaNFzTq2Z" />
   <component name="ProjectLevelVcsManager">
@@ -82,7 +73,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/macde/Documents/react/reviewit_react/public&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/macde/Documents/react/reviewit_react/pages/reviews&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -94,6 +85,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\macde\Documents\react\reviewit_react\pages\reviews" />
       <recent name="C:\Users\macde\Documents\react\reviewit_react\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -135,7 +127,9 @@
       <workItem from="1673557849830" duration="779000" />
       <workItem from="1673559708830" duration="1933000" />
       <workItem from="1673584539963" duration="594000" />
-      <workItem from="1673604045779" duration="14046000" />
+      <workItem from="1673604045779" duration="14354000" />
+      <workItem from="1673664143842" duration="27181000" />
+      <workItem from="1673843350540" duration="13192000" />
     </task>
     <servers />
   </component>

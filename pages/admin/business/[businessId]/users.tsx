@@ -180,12 +180,12 @@ export default function Users() {
     useEffect(() => {
         if (auth.accesstoken?.token) {
             if (router.isReady) {
-                const { organizationId } = router.query;
+                const { businessId } = router.query;
                 setFilter(prevState => {
-                    return { ...prevState, organizationId: organizationId as string}
+                    return { ...prevState, organizationId: businessId as string}
                 });
                 setUserForm(prevState => {
-                    return {...prevState, organisationId: organizationId as string}
+                    return {...prevState, organisationId: businessId as string}
                 });
             }
         }
@@ -275,7 +275,7 @@ export default function Users() {
                                                <i className={'pi pi-user text-lg group-hover:cursor-pointer'}></i>
                                                <label className={'block text-lg leading-none group-hover:cursor-pointer'}>New User</label>
                                            </div>
-                                           <a className={'flex space-x-4 p-4 items-centerw-full dark:bg-gray-800 border dark:border-gray-800 rounded-xl group hover:cursor-pointer'} href={'/admin/organizations'}>
+                                           <a className={'flex space-x-4 p-4 items-centerw-full dark:bg-gray-800 border dark:border-gray-800 rounded-xl group hover:cursor-pointer'} href={'/admin/businesses'}>
                                                <i className={'pi pi-building text-lg group-hover:cursor-pointer'}></i>
                                                <label className={'block text-lg leading-none group-hover:cursor-pointer'}>Organizations</label>
                                            </a>

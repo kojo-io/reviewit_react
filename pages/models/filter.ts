@@ -1,4 +1,5 @@
 export interface Filter{
     search?: string;
-    organizationId?: string
+    organizationId?: string;
+    reviewId?: string;
 }

@@ -4,7 +4,7 @@ interface Props {
     disabled?: boolean;
     size: 'small'|'default'|'large';
     value: number;
-    onChange?: (event: any) => void;
+    onSelectChange: (event: any) => void;
 }
 export const PiRating = (props: Props) => {
     const range = [1, 2, 3, 4, 5];
@@ -18,6 +18,10 @@ export const PiRating = (props: Props) => {
     useEffect(() => {
         setSelectedRate(props.value);
     }, [props.value]);
+
+    useEffect(() => {
+        props.onSelectChange(selectedRate);
+    }, [selectedRate])
 
     return (
         <div className={'flex items-center'}>

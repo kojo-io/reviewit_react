@@ -32,7 +32,7 @@ export default function ReviewId () {
 
     const context = useContext(AuthContext);
 
-    const [paging, setPaging] = useState<Paging>({ pageSize: 5, pageNumber: 1, totalPages: 0, totalRecords: 0, currentSize: 0 });
+    const [paging, setPaging] = useState<Paging>({ pageSize: 10, pageNumber: 1, totalPages: 0, totalRecords: 0, currentSize: 0 });
 
     const [filter, setFilter] = useState<Filter>({});
 
@@ -62,10 +62,11 @@ export default function ReviewId () {
     const [auth, setAuth] = useState<ContextInterface>(getDefault);
 
     const [reviewItem, setReviewItem] = useState<any>();
+
     const [bottom, setBottom] = useState<boolean>(false);
 
     const getReviewItem = () => {
-        fetch(`${url}ReviewItems/GetById/${filter.search}`, {
+        fetch(`${url}ReviewItems/GetById/${filter.reviewId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${auth?.accesstoken?.token}`
@@ -149,9 +150,9 @@ export default function ReviewId () {
     useEffect(() => {
         if (auth.accesstoken?.token) {
             if (router.isReady) {
-                const { reviewId, org } = router.query;
+                const { reviewId, business } = router.query;
                 setFilter(prevState => {
-                    return { ...prevState, organizationId: org as string, search: reviewId as string }
+                    return { ...prevState, organizationId: business as string, reviewId: reviewId as string }
                 });
             }
         }
@@ -192,7 +193,6 @@ export default function ReviewId () {
     })
 
     useEffect(() => {
-        console.log('bottom', bottom);
         if (bottom) {
             loadMoreReviewsHandler();
         }
@@ -237,14 +237,14 @@ export default function ReviewId () {
                                                 {reviewItem?.organisation?.phoneNumber}
                                             </span>
                                         </div>
-                                        <a className={'flex space-x-4 p-4 items-center mt-4 w-full dark:bg-gray-800 border dark:border-gray-800 rounded-xl group hover:cursor-pointer'} href={`/admin/organization/${reviewItem?.organisation?.id}`}>
+                                        <a className={'flex space-x-4 p-4 items-center mt-4 w-full dark:bg-gray-800 border dark:border-gray-800 rounded-xl group hover:cursor-pointer'} href={`/admin/business/${reviewItem?.organisation?.id}`}>
                                             <i className={'pi pi-arrow-left text-lg group-hover:cursor-pointer'}></i>
                                             <label className={'block text-lg leading-none group-hover:cursor-pointer'}>Go back</label>
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="grow h-full lg:columns-3 lg:col-span-3 flex overflow-auto" id={'list-review-items'}>
+                                <div className="grow h-full lg:columns-3 lg:col-span-3 flex overflow-auto feed" id={'list-review-items'}>
                                     <div className={'h-full flex flex-col w-full'}>
                                         <div className={'max-lg:py-2 max-lg:px-2 space-y-4'}>
                                             {
@@ -418,7 +418,7 @@ export default function ReviewId () {
                                         {
                                             reviewItem &&
                                             <div className={'space-y-3'}>
-                                                <div className="p-2 border dark:border-gray-600 rounded-2xl">
+                                                <div className="p-2 border dark:border-gray-800 rounded-2xl dark:bg-gray-800">
                                                     <label className="leading-3 font-bold text-base mb-4">Average Ratings</label>
                                                     <div className="h-auto flex space-x-4 items-center">
                                                         <h1 className="text-5xl font-bold">{reviewItem.ratingAverage.average}</h1>
@@ -427,7 +427,7 @@ export default function ReviewId () {
                                                     <span className="text-gray-400 text-xs">Average rating for all reviews</span>
                                                 </div>
 
-                                                <div className="p-2 border dark:border-gray-600 rounded-2xl space-y-1">
+                                                <div className="p-2 border dark:border-gray-800 rounded-2xl space-y-1 dark:bg-gray-800">
                                                     <label className="leading-3 font-bold text-base">Rating Score</label>
                                                     <div className="flex items-center">
                                                         <span className="text-sm font-medium text-blue-600 dark:text-blue-500">5 star</span>

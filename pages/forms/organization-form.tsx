@@ -98,7 +98,7 @@ export const OrganizationForm  = (props: Props) => {
                         <PiInput value={form.phoneNumber} label={'Phone number'} invalid={inValidPhoneNumber} required={true} id={'org-PhoneNumber'} onChange={phoneNumberInputOnChange}/>
                     </div>
                     <div>
-                        <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select organization logo'} onImageAdded={getFiles} files={image.file} />
+                        <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select business logo'} onImageAdded={getFiles} files={image.file} />
                     </div>
                     <div className="flex w-full">
                         <PiButton loading={props.loading} rounded={'rounded'} type={'primary'} size={'normal'} onClick={onSubmitHandler}>Submit</PiButton>

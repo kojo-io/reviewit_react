@@ -5,12 +5,11 @@ import Head from "next/head";
 import {useRouter} from "next/router";
 import {AuthContext} from "../store/auth-provider";
 import {LoginResponseModel} from "../models/LoginResponseModel";
-import {PiDropdown} from "./PiDropdown";
 import {PiButton} from "./pi-button";
 import {PiIconButton} from "./pi-icon-button";
 
 
-export const OrgBody = (props: any) => {
+export const UserBody = (props: any) => {
     const context = useContext(AuthContext);
     const router = useRouter();
     const [collapse, setCollapse] = useState<boolean>(true);
@@ -27,12 +26,7 @@ export const OrgBody = (props: any) => {
         if (!data) {
             router.push('/');
         } else {
-            if ((data as LoginResponseModel).user?.role?.name !== 'ORGANISATION') {
-                BaseService.clearSessionData();
-                router.push('/');
-            } else {
-                context.canLogin(data as LoginResponseModel);
-            }
+            context.canLogin(data as LoginResponseModel);
         }
     }, []);
 
@@ -40,7 +34,7 @@ export const OrgBody = (props: any) => {
     return (
         <>
             <Head>
-                <title>Review It | Business</title>
+                <title>Review It</title>
                 <meta name="description" content="Powered by Tollesoft" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
@@ -52,7 +46,7 @@ export const OrgBody = (props: any) => {
                             <div className="w-full h-full flex justify-between">
                                 <div className="h-full flex space-x-5">
                                     <h1 className="h-full flex flex-wrap content-center text-2xl font-bold leading-3 text-gray-600 dark:text-white">
-                                       Review.it
+                                        Review.it
                                     </h1>
                                 </div>
 
@@ -95,17 +89,17 @@ export const OrgBody = (props: any) => {
                                         <i className="pi pi-search"></i>
                                     </div>
                                     <div className="h-full flex flex-wrap content-center">
-                                        <img src={context?.user?.image ?? `/user.png`} className={'block border w-[30px] h-[30px] p-1 rounded-full'}/>
+                                        <img src={context?.user?.image ?? `/user.png`} className={'block border w-[45px] h-[45px] p-1 rounded-full'}/>
                                     </div>
                                     <div className="h-full flex flex-wrap content-center">
-                                        <PiButton onClick={context.canLogout} type={'danger'} size={'extra small'} rounded={'rounded'}>Log out</PiButton>
+                                        <PiButton onClick={context.canLogout} type={'danger'} size={'small'} rounded={'rounded'}>Log out</PiButton>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="grow h-full overflow-auto feed">
+                    <div className="grow h-full overflow-auto">
                         {props.children}
                     </div>
                 </div>
@@ -129,19 +123,6 @@ export const OrgBody = (props: any) => {
             {/*                        <label className="leading-3">Search</label>*/}
             {/*                        <i className="pi pi-search"></i>*/}
             {/*                    </div>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-
-            {/*            <div className="grow h-full">*/}
-            {/*                <div className="text-gray-600 dark:text-white w-full pl-2">*/}
-            {/*                    <a className="block w-full cursor-pointer hover:border-r-[3px] hover:border-blue-500 py-2"*/}
-            {/*                       href={'/business/org-dashboard'}>*/}
-            {/*                        <span className="leading-3 cursor-pointer">Dashboard</span>*/}
-            {/*                    </a>*/}
-            {/*                    <a className="block w-full cursor-pointer hover:border-r-[3px] hover:border-blue-500 py-2"*/}
-            {/*                       href={'/business/org-review-items'}>*/}
-            {/*                        <span className="leading-3 cursor-pointer">Review Items</span>*/}
-            {/*                    </a>*/}
             {/*                </div>*/}
             {/*            </div>*/}
 
