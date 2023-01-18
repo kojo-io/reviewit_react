@@ -352,7 +352,7 @@ export default function BusinessId() {
                                                             <div className={'flex space-x-2'}>
                                                                 <span className={'text-gray-300 text-3xl font-bold'}>{Math.floor(review.ratingAverage?.average).toFixed(1)}</span>
                                                                 <div>
-                                                                    <PiRating disabled={true} size={'small'} value={review.ratingAverage?.average} onChange={() => {}}/>
+                                                                    <PiRating disabled={true} size={'small'} value={review.ratingAverage?.average} onSelectChange={() => {}}/>
                                                                     <span className={'text-[13px] pl-1 block leading-none'}>{`${review.ratingAverage?.totalReview} review${(review.ratingAverage?.totalReview > 0 || review.ratingAverage?.totalReview === 0) && 's'}`}</span>
                                                                 </div>
                                                             </div>

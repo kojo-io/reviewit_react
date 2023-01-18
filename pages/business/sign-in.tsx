@@ -123,6 +123,7 @@ export default function SignIn() {
                                             <h1 className={'font-bold text-xl'}>Sign in with your email</h1>
                                             <div>
                                                 <PiInput
+                                                    rounded={'rounded'}
                                                     name={'Email'}
                                                     invalid={inValidEmail}
                                                     label={'Enter your email'}
@@ -134,6 +135,7 @@ export default function SignIn() {
                                             </div>
                                             <div>
                                                 <PiInput
+                                                    rounded={'rounded'}
                                                     name={'Password'}
                                                     invalid={inValidPassword}
                                                     label={'Enter your password'}
@@ -143,8 +145,8 @@ export default function SignIn() {
                                                     type={'password'}
                                                     placeholder={'Your password'} id={'password'}/>
                                             </div>
-                                            <div>
-                                                <PiButton loading={loading} type={'primary'} size={'normal'} rounded={'rounded'} onClick={loginHandler}>
+                                            <div className={'pt-4'}>
+                                                <PiButton loading={loading} block={true} type={'primary'} size={'large'} rounded={'rounded'} onClick={loginHandler}>
                                                     Submit
                                                 </PiButton>
                                             </div>

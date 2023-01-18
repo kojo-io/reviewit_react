@@ -2,7 +2,6 @@ import React, { useEffect, useState} from "react";
 import PiImagePicker from "../shared/pi-image-picker";
 import {PiButton} from "../shared/pi-button";
 import {PiRating} from "../shared/pi-rating";
-import {PiCheckbox} from "../shared/pi-checkbox";
 import {RatingForm} from "../models/Rating";
 import PiTextrea from "../shared/pi-textrea";
 
@@ -12,6 +11,7 @@ interface Props {
     image?: any;
     onFormSubmit: (value: RatingForm, editState: boolean) => void;
     loading: boolean;
+    showImagePicker: true;
 }
 
 export const ReviewForm  = (props: Props) => {
@@ -51,7 +51,6 @@ export const ReviewForm  = (props: Props) => {
     }
 
     const getFiles = (images: Array<any>) => {
-        console.log(images);
         if (images.length > 0) {
             setForm((prevState) => {
                 return {...prevState, images: images.map(image => image.file)}
@@ -67,7 +66,6 @@ export const ReviewForm  = (props: Props) => {
             setInValidFeedback(true);
         }
         if (errorCount === 0) {
-            console.log(form);
             props.onFormSubmit(form, props.editState);
         }
     }
@@ -119,9 +117,12 @@ export const ReviewForm  = (props: Props) => {
                     <PiButton loading={props.loading} type={'primary'} size={'small'} rounded={'rounded'} onClick={onSubmitHandler}>
                         Post
                     </PiButton>
-                    <div className="flex pl-0 space-x-1 sm:pl-2">
-                        <PiImagePicker onImageAdded={getFiles} type={'multiple'} files={image.file} simple={true}/>
-                    </div>
+                    {
+                        props.showImagePicker &&
+                        <div className="flex pl-0 space-x-1 sm:pl-2">
+                            <PiImagePicker onImageAdded={getFiles} type={'multiple'} files={image.file} simple={true} id={'image-picker'}/>
+                        </div>
+                    }
                 </div>
             </div>
         </>

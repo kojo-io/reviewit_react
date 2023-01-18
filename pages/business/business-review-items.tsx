@@ -19,6 +19,7 @@ import {useRouter} from "next/router";
 import {PiSkeletonWrapper} from "../shared/pi-skeleton-wrapper";
 import {Filter} from "../models/filter";
 import {PagedResponse} from "../models/PagedResponse";
+import {PiAvatar} from "../shared/pi-avatar";
 
 export default function BusinessReviewItems() {
     const url = environment.apiUrl;
@@ -341,7 +342,7 @@ export default function BusinessReviewItems() {
                                             <div className={'p-4'}>
                                                 <label className={'pb-2 block'}>Create Review</label>
                                                 <div onClick={openModalHandler}>
-                                                    <PiTextrea rows={2} readOnly={true} onChange={() => {}} id={'dummy'} value={createReviewText}/>
+                                                    <PiTextrea rounded={'rounded'} rows={2} readOnly={true} onChange={() => {}} id={'dummy'} value={createReviewText}/>
                                                 </div>
                                             </div>
                                         </div>
@@ -451,7 +452,7 @@ export default function BusinessReviewItems() {
                                                     <div key={review.id} className={'dark:bg-gray-800 bg-white border overflow-hidden dark:border-gray-800 rounded-2xl w-full'}>
                                                         <div className={'divide-y dark:divide-gray-700'}>
                                                             <div className={'w-full p-3 flex items-center space-x-3'}>
-                                                                <img src={context?.user?.organization?.image ?? `/user.png`} className={'w-[40px] h-[40px] rounded-full'}/>
+                                                                <PiAvatar image={context?.user?.organization?.image}></PiAvatar>
                                                                 <div>
                                                                     <span className={'font-bold'}>{context.user?.organization?.name}</span>
                                                                     <p className={'text-xs dark:text-gray-500 uppercase'}>
@@ -471,7 +472,7 @@ export default function BusinessReviewItems() {
                                                             <div className={'flex space-x-2'}>
                                                                 <span className={'dark:text-gray-300 text-gray-500 text-3xl font-bold'}>{Math.floor(review.ratingAverage?.average).toFixed(1)}</span>
                                                                 <div>
-                                                                    <PiRating disabled={true} size={'small'} value={review.ratingAverage?.average} onChange={() => {}}/>
+                                                                    <PiRating disabled={true} size={'small'} value={review.ratingAverage?.average} onSelectChange={() => {}}/>
                                                                     <span className={'text-[13px] pl-1 block leading-none'}>{`${review.ratingAverage?.totalReview} review${(review.ratingAverage?.totalReview > 0 || review.ratingAverage?.totalReview === 0) && 's'}`}</span>
                                                                 </div>
                                                             </div>

@@ -4,7 +4,7 @@ import {PiSkeleton} from "../../shared/pi-skeleton";
 import {PiTruncate} from "../../shared/pi-truncate";
 import {PiRating} from "../../shared/pi-rating";
 import {environment} from "../../shared/environment";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../store/auth-provider";
 import {ContextInterface} from "../../models/context-interface";
 import {ApiResponse} from "../../models/ApiResponse";
@@ -14,6 +14,10 @@ import {Rating} from "../../shared/rating";
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
 import {PagedResponse} from "../../models/PagedResponse";
 import {PiLoading} from "../../shared/pi-loading";
+import {PiAvatar} from "../../shared/pi-avatar";
+import {PiModal} from "../../shared/pi-modal";
+import {CommentForm} from "../../forms/comment-form";
+import {MessageProps, PiMessage} from "../../shared/pi-message";
 
 interface Score {
     five: number;
@@ -64,6 +68,16 @@ export default function ReviewId () {
 
     const [bottom, setBottom] = useState<boolean>(false);
 
+    const [openComment, setComment] = useState<{ratingId: string, open: boolean}>({ ratingId: '', open: false});
+
+    const messageDialog: MessageProps = {
+        open: false,
+        message: '',
+        type: "success"
+    }
+
+    const [openDialog, setOpenDialog] = useState(messageDialog);
+
     const getReviewItem = () => {
         fetch(`${url}ReviewItems/GetById/${filter.reviewId}`, {
             headers: {
@@ -77,6 +91,91 @@ export default function ReviewId () {
 
         }).catch((reason) => {
 
+        });
+    }
+
+    const openCommentHandler = (ratingId: string) => {
+        setComment((prevState) => {
+            return {...prevState, ratingId: ratingId, open: true}
+        });
+    }
+
+    const closeCommentHandler = () => {
+        setComment((prevState) => {
+            return {...prevState, ratingId: '', open: false, comment: ''}
+        });
+    }
+
+    const openMessageHandler = (options: MessageProps) => {
+        setOpenDialog((prevState) => {
+            return {...prevState, open: options.open, message: options.message, type: options.type }
+        });
+    }
+
+    const closeMessageHandler = () => {
+        setOpenDialog((prevState) => {
+            return {...prevState, open: false }
+        });
+    }
+
+    const getCurrentReviewRatingHandler = () => {
+        setLoading(true);
+        fetch(`${url}ReviewItems/GetUserReviewRatings?pageSize=${paging.pageSize}&pageNumber=${paging.pageNumber}`, {
+            body: JSON.stringify(filter),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth?.accesstoken?.token}`
+            }
+        }).then((response) => {
+            response.json().then((result: PagedResponse<Array<Rating>>) => {
+                const data: Array<Rating> = [];
+                result.data.forEach((rate) => {
+                    data.push(rate);
+                });
+                setRatings(data);
+                setPaging(prevState => {
+                    return { ...prevState, pageSize: result.pageSize, totalPages: result.totalPages, totalRecords: result.totalRecords, currentSize: result.data.length}
+                });
+            }).finally(() => {
+                setLoadMore(false);
+                setLoading(false);
+            });
+
+        }).catch((reason) => {
+
+        });
+    }
+
+    const saveRatingCommentHandler = (form: string) => {
+        setLoading(true);
+        const data = {
+            comment: form,
+            ratingId: openComment.ratingId
+        }
+        fetch(`${url}ReviewItems/CommentAsOrganization`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth?.accesstoken?.token}`
+            }
+        }).then((response) => {
+            response.json().then((result: ApiResponse<any>) => {
+                if (result.status === 100) {
+                    getReviewItem();
+                    getCurrentReviewRatingHandler();
+                    closeCommentHandler();
+                    openMessageHandler({type: "success", message: result.message, open: true});
+                } else {
+                    openMessageHandler({type: "error", message: result.message, open: true});
+                }
+            }).finally(() => {
+                setLoading(false);
+            });
+
+        }).catch((reason) => {
+            openMessageHandler({type: "error", message: 'something went wrong please try again', open: true});
         });
     }
 
@@ -212,6 +311,15 @@ export default function ReviewId () {
     return (
         <>
             <OrgBody showBackButton={true}>
+                {
+                    openDialog.open && <PiMessage onClose={closeMessageHandler} message={openDialog.message} type={openDialog.type}/>
+                }
+                {
+                    openComment.open &&
+                    <PiModal fullScreen={false} onClose={closeCommentHandler}>
+                        <CommentForm onFormSubmit={(e) => {saveRatingCommentHandler(e)}} loading={loading}/>
+                    </PiModal>
+                }
                 <div className="flex flex-col w-full h-full">
                     <div className="flex justify-center w-full h-full">
                         <div className="max-xl:w-full xl:w-10/12 2xl:w-4/6 space-y-4">
@@ -221,7 +329,7 @@ export default function ReviewId () {
                                 <div className={'lg:columns-1 lg:col-span-2 max-lg:hidden max-lg:px-2'}>
                                     <div className={'w-full sticky top-4'}>
                                         <div className={'w-full bg-white dark:bg-gray-800 border dark:border-gray-800 rounded-xl p-4'}>
-                                            <img src={context?.user?.organization?.image ?? `/user.png`} className={'block border m-auto w-[100px] h-[100px] p-1 rounded-full'}/>
+                                            <img src={context?.user?.organization?.image ?? `/user.png`} className={'block m-auto max-w-[150px] h-auto p-1 rounded-lg'}/>
                                             <span className={'block text-2xl text-center mt-4'}>
                                             {context.user?.organization?.name}
                                         </span>
@@ -378,24 +486,79 @@ export default function ReviewId () {
                                                             ratings.length > 0 &&
                                                             ratings.map((rate) =>
                                                                 <div key={rate.id} className={'flex space-x-2'}>
-                                                                    <img src={`/user.png`} className={'w-[40px] h-[40px] rounded-full'}/>
+                                                                    <PiAvatar image={rate.user?.image} />
                                                                     <div className={'w-full'}>
                                                                         <div className={'flex justify-between items-center'}>
                                                                             <div className={'pb-2'}>
-                                                                                <span className={'font-bold'}>{rate.anonymous ? 'Anonymous' : rate.name}</span>
+                                                                                {
+                                                                                    !rate.notLoggedIn &&
+                                                                                    <span className={'font-bold'}>{rate.anonymous ? 'Anonymous' : `${rate.user?.firstName} ${rate.user?.lastName}`}</span>
+                                                                                }
+                                                                                {
+                                                                                    rate.notLoggedIn &&
+                                                                                    <span className={'font-bold'}>{rate.anonymous ? 'Anonymous' : rate?.name}</span>
+                                                                                }
                                                                                 <div className={'flex space-x-2'}>
                                                                                     <span>{Math.floor(rate.rating).toFixed(1)}</span>
-                                                                                    <PiRating disabled={true} size={'small'} value={rate.rating}/>
+                                                                                    <PiRating disabled={true} size={'small'} value={rate.rating} onSelectChange={() => {}}/>
                                                                                 </div>
                                                                             </div>
                                                                             <span className={'text-[13px]'}>{ formatDistanceToNowStrict(new Date(rate.date)) } ago</span>
                                                                         </div>
                                                                         <div className={'text-[15px] dark:bg-gray-700 dark:text-gray-100 bg-gray-200 p-3 w-full rounded-tr-lg rounded-b-lg'}>
                                                                             {rate.feedback ?? 'No feedback'}
+                                                                            {
+                                                                                rate.images.length > 0 &&
+                                                                                <div className={'w-32 p-4 rounded mt-2 border dark:border-gray-700 border-gray-200 h-24 bg-center bg-cover'} style={{backgroundImage: `url(${rate.images[0].image})`}}></div>
+                                                                            }
+                                                                        </div>
+                                                                        <div className={'flex justify-end py-2'}>
+                                                                            <div onClick={() => {openCommentHandler(rate.id)}} className={'flex items-center space-x-2 group cursor-pointer'}>
+                                                                                <i className={'pi pi-comments group-hover:cursor-pointer'}></i>
+                                                                                <label className={'leading-none group-hover:cursor-pointer'}>
+                                                                                    reply
+                                                                                </label>
+                                                                            </div>
                                                                         </div>
                                                                         {
-                                                                            rate.images.length > 0 &&
-                                                                            <div className={'w-32 p-4 rounded mt-2 border dark:border-gray-700 border-gray-200 h-24 bg-center bg-cover'} style={{backgroundImage: `url(${rate.images[0].image})`}}></div>
+                                                                            rate.comments?.length > 0 &&
+                                                                            <>
+                                                                                {/*<span>Comments</span>*/}
+                                                                                <div className={'ml-4'}>
+                                                                                    {
+                                                                                        rate.comments.map((comment: any) =>
+                                                                                            <div key={comment.id} className={'flex space-x-2'}>
+                                                                                                {
+                                                                                                    comment.responseAsOrganization &&
+                                                                                                    <PiAvatar image={comment.user?.organization?.image} />
+                                                                                                }
+                                                                                                {
+                                                                                                    !comment.responseAsOrganization &&
+                                                                                                    <PiAvatar image={comment.user?.image} />
+                                                                                                }
+                                                                                                <div className={'w-full'}>
+                                                                                                    <div className={'flex justify-between items-center'}>
+                                                                                                        <div className={'pb-2'}>
+                                                                                                            {
+                                                                                                                comment.responseAsOrganization &&
+                                                                                                                <span className={'font-bold'}>{`${comment.user?.organization?.name}`}</span>
+                                                                                                            }
+                                                                                                            {
+                                                                                                                !comment.responseAsOrganization &&
+                                                                                                                <span className={'font-bold'}>{`${comment.user?.firstName} ${comment.user?.lastName}`}</span>
+                                                                                                            }
+                                                                                                        </div>
+                                                                                                        <span className={'text-[13px]'}>{ formatDistanceToNowStrict(new Date(comment.date)) } ago</span>
+                                                                                                    </div>
+                                                                                                    <div className={'text-[15px] dark:bg-gray-700 dark:text-gray-100 bg-gray-200 p-3 w-full rounded-tr-lg rounded-b-lg'}>
+                                                                                                        {comment.comment}
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        )
+                                                                                    }
+                                                                                </div>
+                                                                            </>
                                                                         }
                                                                     </div>
                                                                 </div>
@@ -424,8 +587,8 @@ export default function ReviewId () {
                                                 <div className="p-2 border dark:border-gray-800 rounded-2xl bg-white dark:bg-gray-800">
                                                     <label className="leading-3 font-bold text-base mb-4">Average Ratings</label>
                                                     <div className="h-auto flex space-x-4 items-center">
-                                                        <h1 className="text-5xl font-bold">{reviewItem.ratingAverage.average}</h1>
-                                                        <PiRating disabled={true} size={'default'} value={reviewItem.ratingAverage.average}  />
+                                                        <h1 className="text-5xl font-bold">{Math.floor(reviewItem.ratingAverage.average).toFixed(1)}</h1>
+                                                        <PiRating disabled={true} size={'default'} value={reviewItem.ratingAverage.average} onSelectChange={() => {}} />
                                                     </div>
                                                     <span className="text-gray-400 text-xs">Average rating for all reviews</span>
                                                 </div>
@@ -437,35 +600,35 @@ export default function ReviewId () {
                                                         <div className="w-2/4 h-2 mx-4 bg-gray-200 rounded dark:bg-gray-700">
                                                             <div className="h-2 bg-yellow-400 rounded" style={{ width: `${score.five}%`}}></div>
                                                         </div>
-                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{score.five}%</span>
+                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{Math.floor(score.five)}%</span>
                                                     </div>
                                                     <div className="flex items-center">
                                                         <span className="text-sm font-medium text-blue-600 dark:text-blue-500">4 star</span>
                                                         <div className="w-2/4 h-2 mx-4 bg-gray-200 rounded dark:bg-gray-700">
                                                             <div className="h-2 bg-yellow-400 rounded" style={{ width: `${score.four}%`}}></div>
                                                         </div>
-                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{score.four}%</span>
+                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{Math.floor(score.four)}%</span>
                                                     </div>
                                                     <div className="flex items-center">
                                                         <span className="text-sm font-medium text-blue-600 dark:text-blue-500">3 star</span>
                                                         <div className="w-2/4 h-2 mx-4 bg-gray-200 rounded dark:bg-gray-700">
                                                             <div className="h-2 bg-yellow-400 rounded" style={{ width: `${score.three}%`}}></div>
                                                         </div>
-                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{score.three}%</span>
+                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{Math.floor(score.three)}%</span>
                                                     </div>
                                                     <div className="flex items-center">
                                                         <span className="text-sm font-medium text-blue-600 dark:text-blue-500">2 star</span>
                                                         <div className="w-2/4 h-2 mx-4 bg-gray-200 rounded dark:bg-gray-700">
                                                             <div className="h-2 bg-yellow-400 rounded" style={{ width: `${score.two}%`}}></div>
                                                         </div>
-                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{score.two}%</span>
+                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{Math.floor(score.two)}%</span>
                                                     </div>
                                                     <div className="flex items-center">
                                                         <span className="text-sm font-medium text-blue-600 dark:text-blue-500">1 star</span>
                                                         <div className="w-2/4 h-2 mx-4 bg-gray-200 rounded dark:bg-gray-700">
                                                             <div className="h-2 bg-yellow-400 rounded" style={{ width: `${score.one}%`}}></div>
                                                         </div>
-                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{score.one}%</span>
+                                                        <span className="text-sm font-medium text-blue-600 dark:text-blue-500">{Math.floor(score.one)}%</span>
                                                     </div>
                                                 </div>
                                             </div>

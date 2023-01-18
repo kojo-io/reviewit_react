@@ -11,14 +11,15 @@ interface Props {
     onChange: (event: any) => void;
     readOnly?: boolean;
     invalid?: boolean;
+    rounded?: 'rounded' | 'none'
 }
 
 const PiInput = (props: Props) => {
     const [inputTouched, setInputTouched] = useState<boolean>(false);
     const [inputIsValid, setInputIsValid] = useState<boolean>(false);
     const emailRegex = /(\w\.?)+@[\w\.-]+\.\w{2,}/
-    const digitRegex = /[0-9]/
-    const defaultClass = 'bg-gray-50 focus:outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white';
+    const passwordRegex = /[0-9]/
+    const defaultClass = 'bg-gray-50 focus:outline-none text-gray-900 text-sm block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white';
     const inputValidClass = 'focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 border border-gray-300 dark:border-gray-600';
     const invalidClass = 'focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 border border-red-500 dark:border-red-600'
     const [inputClass, setInputClass] = useState(defaultClass);
@@ -87,7 +88,8 @@ const PiInput = (props: Props) => {
                    value={props.value}
                    pattern={`${props.type === 'email' && emailRegex}`}
                    readOnly={props.readOnly}
-                   className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass}`}
+                   className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass}
+                    ${props.rounded === 'rounded' && 'rounded-lg'}`}
                    placeholder={props.placeholder} required={props.required} />
             {
                 inputIsInValid &&

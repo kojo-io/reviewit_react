@@ -57,19 +57,25 @@ export const OrgBody = (props: any) => {
                                 </div>
 
                                 <div className="h-full flex space-x-3">
-                                    <div className="flex flex-wrap content-center">
-                                        <div
-                                            className="flex justify-between border border-gray-300 dark:border-white px-2 py-1.5 items-center rounded-xl text-gray-300 dark:text-white w-[150px]">
-                                            <label className="leading-3">Search</label>
-                                            <i className="pi pi-search"></i>
+                                    {
+                                        props.showSearch &&
+                                        <div className="flex flex-wrap content-center">
+                                            <div
+                                                className="flex justify-between border border-gray-300 dark:border-white px-2 py-1.5 items-center rounded-xl text-gray-300 dark:text-white w-[150px]">
+                                                <label className="leading-3">Search</label>
+                                                <i className="pi pi-search"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="h-full flex flex-wrap content-center">
-                                        <img src={context?.user?.image ?? `/user.png`} className={'block border w-[45px] h-[45px] p-1 rounded-full'}/>
-                                    </div>
-                                    <h1 className={'h-full flex flex-wrap content-center text-base font-bold uppercase leading-3 cursor-pointer text-gray-600 dark:text-white'}>
-                                        {context?.user?.firstName} {context?.user?.lastName}
-                                    </h1>
+                                    }
+                                    <a className="h-full flex flex-wrap content-center" href={'/account/profile'}>
+                                        <div className={'flex items-center space-x-2'}>
+                                            <div className={'w-[45px] h-[45px] rounded-full p-1 bg-center bg-cover bg-no-repeat border dark:border-gray-700 overflow-hidden relative'} style={{backgroundImage: `url(${context?.user?.image ?? `/user.png`})`}}>
+                                            </div>
+                                            <span className={'text-base font-bold uppercase leading-3 cursor-pointer text-gray-600 dark:text-white'}>
+                                                {context?.user?.firstName} {context?.user?.lastName}
+                                            </span>
+                                        </div>
+                                    </a>
                                     <div className="h-full flex flex-wrap content-center">
                                         <PiButton onClick={context.canLogout} type={'danger'} size={'normal'} rounded={'rounded'}>Log out</PiButton>
                                     </div>
@@ -91,9 +97,12 @@ export const OrgBody = (props: any) => {
                                     </div>
                                 </div>
                                 <div className="h-full flex space-x-3">
-                                    <div className="flex flex-wrap content-center">
-                                        <i className="pi pi-search"></i>
-                                    </div>
+                                    {
+                                        props.showSearch &&
+                                        <div className="flex flex-wrap content-center">
+                                            <i className="pi pi-search"></i>
+                                        </div>
+                                    }
                                     <div className="h-full flex flex-wrap content-center">
                                         <img src={context?.user?.image ?? `/user.png`} className={'block border w-[30px] h-[30px] p-1 rounded-full'}/>
                                     </div>

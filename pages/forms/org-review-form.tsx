@@ -5,7 +5,6 @@ import PiTextrea from "../shared/pi-textrea";
 import PiImagePicker from "../shared/pi-image-picker";
 import {PiButton} from "../shared/pi-button";
 import {ReviewItem, ReviewItemForm} from "../models/review item";
-import {PiLoading} from "../shared/pi-loading";
 import {PiCheckbox} from "../shared/pi-checkbox";
 
 interface Props {
@@ -24,7 +23,7 @@ const OrgReviewForm = (props: Props) => {
     const [inValidName, setInValidName] = useState<boolean>(false);
     const [inValidListData, setInValidListData] = useState<boolean>(false);
     const [inValidImage, setInValidImage] = useState<boolean>(false);
-    const [image, setImage] = useState<{file: Array<{file: string}>}>({file: []});
+    // const [image, setImage] = useState<{file: Array<{file: string}>}>({file: []});
 
     const getReviewType = (data: any) => {
         setForm((prevState) => {
@@ -73,40 +72,27 @@ const OrgReviewForm = (props: Props) => {
             errorCount ++;
             setInValidListData(true);
         }
-        // if (form.image.length === 0) {
-        //     errorCount ++;
-        //     setInValidImage(true);
-        // }
         if (errorCount === 0) {
             props.onFormSubmit(form, props.editState);
         }
     }
 
-    useEffect(() => {
-        if (form.image) {
-            const images: Array<{file: string}> = []
-            images.push({file: form.image});
-            setImage(prevState => {
-                return {...prevState, file: images}
-            });
-        }
-    }, [form]);
 
     return (
         <>
             <div className="flex flex-col h-full w-full ">
                 <form className="space-y-3">
                     <div>
-                        <PiSelectList value={form.reviewType} allowSearch={false} invalid={inValidListData} required={true} label={'What do you want to review ?'} dataValue={'id'} dataLabel={'name'} data={props.listData} onValueChange={getReviewType} />
+                        <PiSelectList rounded={'rounded'} value={form.reviewType} allowSearch={false} invalid={inValidListData} required={true} label={'What do you want to review ?'} dataValue={'id'} dataLabel={'name'} data={props.listData} onValueChange={getReviewType} />
                     </div>
                     <div>
-                        <PiInput invalid={inValidName} required={true} id={'name'} label={'Name'} value={form.name} onChange={nameInputOnChange} />
+                        <PiInput rounded={'rounded'} invalid={inValidName} required={true} id={'name'} label={'Name'} value={form.name} onChange={nameInputOnChange} />
                     </div>
                     <div>
-                        <PiTextrea rows={6} invalid={inValidDescription} required={true} id={'Description'} label={'Description'} value={form.description} onChange={descriptionInputOnChange} />
+                        <PiTextrea rounded={'rounded'} rows={6} invalid={inValidDescription} required={true} id={'Description'} label={'Description'} value={form.description} onChange={descriptionInputOnChange} />
                     </div>
                     <div>
-                        <PiImagePicker invalid={inValidImage} required={false} type={'single'} label={'Select Image'} onImageAdded={getFiles} files={image.file} />
+                        <PiImagePicker invalid={inValidImage} required={false} type={'single'} label={'Select Image'} onImageAdded={getFiles} files={[`${form.image}`]} id={'image-picker'} />
                     </div>
                     <div>
                         <PiCheckbox position={'right'} value={form.allowPhoto} label={'Allow users to add photo evidence'} onChange={allowPhotoOnChange}/>

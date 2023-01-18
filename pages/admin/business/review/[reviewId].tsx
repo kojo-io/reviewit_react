@@ -390,7 +390,7 @@ export default function ReviewId () {
                                                                                 <span className={'font-bold'}>{rate.anonymous ? 'Anonymous' : rate.name}</span>
                                                                                 <div className={'flex space-x-2'}>
                                                                                     <span>{Math.floor(rate.rating).toFixed(1)}</span>
-                                                                                    <PiRating disabled={true} size={'small'} value={rate.rating}/>
+                                                                                    <PiRating disabled={true} size={'small'} value={rate.rating} onSelectChange={() => {}}/>
                                                                                 </div>
                                                                             </div>
                                                                             <span className={'text-[13px]'}>{ formatDistanceToNowStrict(new Date(rate.date)) } ago</span>
@@ -422,7 +422,7 @@ export default function ReviewId () {
                                                     <label className="leading-3 font-bold text-base mb-4">Average Ratings</label>
                                                     <div className="h-auto flex space-x-4 items-center">
                                                         <h1 className="text-5xl font-bold">{reviewItem.ratingAverage.average}</h1>
-                                                        <PiRating disabled={true} size={'default'} value={reviewItem.ratingAverage.average}  />
+                                                        <PiRating disabled={true} size={'default'} value={reviewItem.ratingAverage.average} onSelectChange={() => {}} />
                                                     </div>
                                                     <span className="text-gray-400 text-xs">Average rating for all reviews</span>
                                                 </div>

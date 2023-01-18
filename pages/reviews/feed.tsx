@@ -15,6 +15,9 @@ import {PiTruncate} from "../shared/pi-truncate";
 import {PiRating} from "../shared/pi-rating";
 import {PiButton} from "../shared/pi-button";
 import {PiAvatar} from "../shared/pi-avatar";
+import {ApiResponse} from "../models/ApiResponse";
+import {ItemType} from "../models/ItemType";
+import {Organization} from "../models/Organization";
 
 export default function Feed() {
     const url = environment.apiUrl;
@@ -32,6 +35,8 @@ export default function Feed() {
 
     const [filter, setFilter] = useState<Filter>({ });
 
+    const [filterState, setFilterState] = useState<boolean>(false);
+
     const [currentSize, setCurrentSize] = useState<number>(0);
 
     const [loadMore, setLoadMore] = useState<boolean>(false);
@@ -42,6 +47,10 @@ export default function Feed() {
 
     const [reviews, setReviews] = useState<ReviewItem[]>([]);
 
+    const [params, setParams] = useState<Array<{id: any, name: string}>>([]);
+
+    const [organizations, setOrganizations] = useState<Array<Organization>>([]);
+    const [closeModal, setCloseModal] = useState<boolean>(false);
     const reviewAnalyticsRouteHandler = (reviewId: any) => {
         router.push(`/reviews/${reviewId}`);
     }
@@ -51,6 +60,16 @@ export default function Feed() {
         setPaging(prevState => {
             return {...prevState, pageNumber: prevState.pageNumber + 1}
         });
+    }
+
+    const updateFilterHandler = (filter: Filter) => {
+        setFilter(prevState => {
+            return {...prevState, search: filter.search, organizationId: filter.organizationId, params: filter.params}
+        });
+        setPaging(prevState => {
+            return { ...prevState, pageSize: 10, pageNumber: 1}
+        });
+        setFilterState(true);
     }
 
     const getAllReviewItemsHandler = () => {
@@ -84,6 +103,73 @@ export default function Feed() {
         });
     }
 
+    const getFilterReviewItemsHandler = () => {
+        setLoading(true);
+        fetch(`${url}ReviewItems/GetAllReviews?pageSize=${paging.pageSize}&pageNumber=${paging.pageNumber}`, {
+            method: 'POST',
+            body: JSON.stringify(filter),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth?.accesstoken?.token}`
+            }
+        }).then((response) => {
+            response.json().then((result: PagedResponse<Array<ReviewItem>>) => {
+                const data: Array<ReviewItem> = [];
+                result.data.forEach((rate) => {
+                    const find = data.find(u => u.id === rate.id);
+                    if (!find) {
+                        data.push(rate)
+                    }
+                });
+                setReviews(data);
+                setPaging(prevState => {
+                    return { ...prevState, pageSize: result.pageSize, totalPages: result.totalPages, totalRecords: result.totalRecords, currentSize: result.data.length}
+                });
+            }).finally(() => {
+                setLoadMore(false);
+                setLoading(false);
+                setFilterState(false);
+                setCloseModal(true);
+            });
+
+        }).catch((reason) => {
+        });
+    }
+
+    // get params
+    const getParamsHandler = () => {
+        fetch(`${url}Account/Params`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth?.accesstoken?.token}`
+            }
+        }).then((response) => {
+            response.json().then((result: ApiResponse<any>) => {
+                setParams(result.data);
+            });
+
+        }).catch((reason) => {
+
+        });
+    }
+
+    // get params
+    const getOrganizationsHandler = () => {
+        fetch(`${url}Organization`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth?.accesstoken?.token}`
+            }
+        }).then((response) => {
+            response.json().then((result: ApiResponse<any>) => {
+                setOrganizations(result.data);
+            });
+
+        }).catch((reason) => {
+
+        });
+    }
+
     // check token
     useEffect(() => {
         setAuth((prevState) => {
@@ -95,6 +181,8 @@ export default function Feed() {
     useEffect(() => {
         if (auth.accesstoken?.token) {
             getAllReviewItemsHandler();
+            getParamsHandler();
+            getOrganizationsHandler();
         }
     }, [auth]);
 
@@ -141,8 +229,14 @@ export default function Feed() {
         }
     }, [loadMore]);
 
+    useEffect(() => {
+        if (filterState) {
+            getFilterReviewItemsHandler();
+        }
+    }, [filterState])
+
     return (
-        <UserBody>
+        <UserBody onModalClose={(e: boolean) => {setCloseModal(e)}} closeModal={closeModal} loading={loading} onFilterChange={updateFilterHandler} showSearch={true} organizations={organizations} params={params}>
             <div className="flex flex-col w-full h-full">
                 <div className="flex justify-center w-full h-full">
                     <div className="max-xl:w-full xl:w-10/12 2xl:w-4/6 space-y-4">

@@ -9,4 +9,5 @@ export interface Rating{
     images: Array<any>,
     notLoggedIn?:boolean;
     user?: any;
+    comments?: any;
 }

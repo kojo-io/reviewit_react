@@ -22,7 +22,7 @@ export const OrganizationForm  = (props: Props) => {
     const [inValidPhoneNumber, setInValidPhoneNumber] = useState<boolean>(false);
     const [inValidImage, setInValidImage] = useState<boolean>(false);
 
-    const [image, setImage] = useState<{file: Array<{file: string}>}>({file: []});
+    // const [image, setImage] = useState<{file: Array<{file: string}>}>({file: []});
 
     const phoneNumberInputOnChange = (data: any) => {
         setForm((prevState) => {
@@ -74,31 +74,21 @@ export const OrganizationForm  = (props: Props) => {
         }
     }
 
-    useEffect(() => {
-        if (form.image) {
-            const images: Array<{file: string}> = []
-            images.push({file: form.image});
-            setImage(prevState => {
-                return {...prevState, file: images}
-            });
-        }
-    }, [form]);
-
     return (
         <>
             <div className="flex flex-col h-full w-full ">
                 <form className="space-y-3">
                     <div>
-                        <PiInput invalid={inValidName} required={true} id={'name'} label={'Name'} value={form.name} onChange={nameInputOnChange} />
+                        <PiInput rounded={'rounded'} invalid={inValidName} required={true} id={'name'} label={'Name'} value={form.name} onChange={nameInputOnChange} />
                     </div>
                     <div>
-                        <PiTextrea rows={4} invalid={inValidAddress} required={true} id={'Address'} label={'Address'} value={form.address} onChange={addressInputOnChange} />
+                        <PiTextrea rounded={'rounded'} rows={4} invalid={inValidAddress} required={true} id={'Address'} label={'Address'} value={form.address} onChange={addressInputOnChange} />
                     </div>
                     <div>
-                        <PiInput value={form.phoneNumber} label={'Phone number'} invalid={inValidPhoneNumber} required={true} id={'org-PhoneNumber'} onChange={phoneNumberInputOnChange}/>
+                        <PiInput rounded={'rounded'} value={form.phoneNumber} label={'Phone number'} invalid={inValidPhoneNumber} required={true} id={'org-PhoneNumber'} onChange={phoneNumberInputOnChange}/>
                     </div>
                     <div>
-                        <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select business logo'} onImageAdded={getFiles} files={image.file} />
+                        <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select business logo'} onImageAdded={getFiles} files={[`${form.image}`]} id={'image-picker'} />
                     </div>
                     <div className="flex w-full">
                         <PiButton loading={props.loading} rounded={'rounded'} type={'primary'} size={'normal'} onClick={onSubmitHandler}>Submit</PiButton>

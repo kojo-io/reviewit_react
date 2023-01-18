@@ -1,10 +1,6 @@
 import React, { useEffect, useState} from "react";
-import PiImagePicker from "../shared/pi-image-picker";
-import {PiLoading} from "../shared/pi-loading";
 import PiInput from "../shared/pi-input";
-import {PiButton} from "../shared/pi-button";
-import PiTextrea from "../shared/pi-textrea";
-import {Organization} from "../models/Organization";
+import {PiButton} from "../shared/pi-button";;
 import {User} from "../models/User";
 
 interface Props {
@@ -21,9 +17,6 @@ export const OrganizationUserForm  = (props: Props) => {
     const [inValidFirstName, setInValidFirstName] = useState<boolean>(false);
     const [inValidLastName, setInValidLastName] = useState<boolean>(false);
     const [inValidEmail, setInValidEmail] = useState<boolean>(false);
-    // const [inValidImage, setInValidImage] = useState<boolean>(false);
-
-    // const [image, setImage] = useState<{file: Array<{file: string}>}>({file: []});
 
     const emailInputOnChange = (data: any) => {
         setForm((prevState) => {
@@ -42,14 +35,6 @@ export const OrganizationUserForm  = (props: Props) => {
             return {...prevState, lastName: event}
         });
     }
-
-    // const getFiles = (images: Array<any>) => {
-    //     if (images.length > 0) {
-    //         setForm((prevState) => {
-    //             return {...prevState, image: images[0]?.file}
-    //         });
-    //     }
-    // }
 
     const onSubmitHandler = (event?: any) => {
         event.preventDefault();
@@ -90,16 +75,16 @@ export const OrganizationUserForm  = (props: Props) => {
             <div className="flex flex-col h-full w-full ">
                 <form className="space-y-3">
                     <div>
-                        <PiInput invalid={inValidLastName} required={true} id={'firstName'} label={'First Name'} value={form.lastName} onChange={lastNameInputOnChange} />
+                        <PiInput rounded={'rounded'} invalid={inValidLastName} required={true} id={'firstName'} label={'First Name'} value={form.lastName} onChange={lastNameInputOnChange} />
                     </div>
                     <div>
-                        <PiInput invalid={inValidFirstName} required={true} id={'lastName'} label={'Last Name'} value={form.firstName} onChange={firstNameInputOnChange} />
+                        <PiInput rounded={'rounded'} invalid={inValidFirstName} required={true} id={'lastName'} label={'Last Name'} value={form.firstName} onChange={firstNameInputOnChange} />
                     </div>
                     <div>
-                        <PiInput value={form.email} label={'Email'} invalid={inValidEmail} required={true} id={'email'} onChange={emailInputOnChange}/>
+                        <PiInput rounded={'rounded'} value={form.email} label={'Email'} invalid={inValidEmail} required={true} id={'email'} onChange={emailInputOnChange}/>
                     </div>
                     {/*<div>*/}
-                    {/*    <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select business logo'} onImageAdded={getFiles} files={image.file} />*/}
+                    {/*    <PiImagePicker invalid={inValidImage} required={true} type={'single'} label={'Select business logo'} onImageAdded={getFiles} files={[`${image.file}`]} />*/}
                     {/*</div>*/}
                     <div className="flex w-full">
                         <PiButton loading={props.loading} rounded={'rounded'} type={'primary'} size={'normal'} onClick={onSubmitHandler}>Submit</PiButton>

@@ -16,6 +16,7 @@ interface Props {
     dataLabel: string;
     allowSearch?: boolean;
     value?: any;
+    rounded?: 'rounded' | 'none'
 }
 const PiSelectList = (props: Props) => {
     const id = uuid();
@@ -27,7 +28,7 @@ const PiSelectList = (props: Props) => {
     const inputRef = useRef<HTMLInputElement>(ele as HTMLInputElement);
     const [inputTouched, setInputTouched] = useState<boolean>(false);
     const [inputIsValid, setInputIsValid] = useState<boolean>(false);
-    const defaultClass = 'bg-gray-50 focus:outline-none text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white';
+    const defaultClass = 'bg-gray-50 focus:outline-none text-gray-900 text-sm block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white';
     const inputValidClass = 'focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 border border-gray-300 dark:border-gray-600';
     const invalidClass = 'focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 border border-red-500 dark:border-red-600'
     const [inputClass, setInputClass] = useState(defaultClass);
@@ -128,7 +129,8 @@ const PiSelectList = (props: Props) => {
                     onChange={onDisplayModelChange}
                     value={displayLabel}
                     ref={inputRef}
-                    className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass}`}
+                    className={`${defaultClass} ${inputIsInValid ? `${ props.required ? invalidClass : inputValidClass }` : inputValidClass}
+                    ${props.rounded === 'rounded' && 'rounded-lg'}`}
                     id={id}  />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <div className="flex flex-col">
@@ -142,7 +144,7 @@ const PiSelectList = (props: Props) => {
                 <>
                     {
                         props.required &&
-                        <small className={'text-red-600'}>{props.label} is required *</small>
+                        <small className={'text-red-600'}>{props.name ?? props.label} is required *</small>
                     }
                 </>
             }

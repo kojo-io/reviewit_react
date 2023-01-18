@@ -1,5 +1,6 @@
 import React, {useEffect, useReducer, useRef, useState} from "react";
 import {uuid} from "./base.service";
+import {el} from "date-fns/locale";
 
 interface Props {
     label?: string;
@@ -11,12 +12,12 @@ interface Props {
     output?: 'file' | 'base64';
     files: Array<any>;
     simple?: boolean;
+    icon?: string;
+    id: string;
 }
 const PiImagePicker = (props: Props) => {
-    const id = uuid();
-
-    const ele = document.getElementById(id)
-    const imageInputRef = useRef<HTMLInputElement>(ele as HTMLInputElement);
+    const [ele, setEle] = useState<HTMLInputElement>();
+    const imageInputRef = useRef<HTMLInputElement>();
     const [inputTouched, setInputTouched] = useState<boolean>(false);
     const [inputIsValid, setInputIsValid] = useState<boolean>(false);
     const defaultClass = '"w-full border border-dashed h-auto divide-y rounded-lg';
@@ -133,7 +134,9 @@ const PiImagePicker = (props: Props) => {
         }
     }
     const selectImage = () => {
-        imageInputRef.current.click();
+        if (imageInputRef.current) {
+            imageInputRef.current.click();
+        }
     }
     const clearImages = () => {
         setImage(prevState => {
@@ -142,14 +145,18 @@ const PiImagePicker = (props: Props) => {
         setOutImage(prevState => {
             return {...prevState, files: []}
         });
-        imageInputRef.current.value = '';
+       if (imageInputRef.current) {
+           imageInputRef.current.value = '';
+       }
     }
 
     const clearImage = (index: number) => {
         let image: Array<any> = [...images.files];
         image.splice(index, 1);
         if (image.length === 0) {
-            imageInputRef.current.value = '';
+            if (imageInputRef.current) {
+                imageInputRef.current.value = '';
+            }
         }
         setOutImage(prevState => {
             return {...prevState, files: image}
@@ -158,6 +165,13 @@ const PiImagePicker = (props: Props) => {
             return {...prevState, files: image}
         })
     }
+
+    useEffect(() => {
+        const element = document.getElementById(props.id) as HTMLInputElement;
+        if (element) {
+            setEle(element)
+        }
+    }, [])
 
     useEffect(() => {
         props.onImageAdded(outImages.files);
@@ -184,7 +198,8 @@ const PiImagePicker = (props: Props) => {
 
     return (
         <>
-            <input id={id} accept={'image/*'} hidden ref={imageInputRef} multiple={props.type === 'multiple'} type="file" onChange={(e) => selectFiles(e)} />
+            {/*@ts-ignore*/}
+            <input id={props.id} accept={'image/*'} hidden ref={imageInputRef} multiple={props.type === 'multiple'} type="file" onChange={(e) => selectFiles(e)} />
             {
                 !props.simple &&
                 <>
@@ -245,11 +260,18 @@ const PiImagePicker = (props: Props) => {
                 <button type="button"
                         onClick={selectImage}
                         className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                    <svg aria-hidden="true" className="w-5 h-5"
-                         fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path>
-                    </svg>
+                    {
+                        props.icon &&
+                        <i className={`${props.icon} text-base`}></i>
+                    }
+                    {
+                        !props.icon &&
+                        <svg aria-hidden="true" className="w-5 h-5"
+                             fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path>
+                        </svg>
+                    }
                     <span className="sr-only">Upload image</span>
                 </button>
             }
