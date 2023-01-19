@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02eef49e-2994-4e76-935a-940a9a3c445d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/account/account.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/account/change-email.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/account/change-password.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/account/profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/forms/comment-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/forms/filter-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/business/[businessId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/business/[businessId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/business/review/[reviewId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/business/review/[reviewId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/business/business-review-items.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/business/business-review-items.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/business/review/[reviewId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/business/review/[reviewId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/business/sign-in.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/business/sign-in.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/forms/org-review-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/org-review-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/forms/organization-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/organization-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/forms/organization-user-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/organization-user-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/forms/review-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forms/review-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/models/filter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/models/filter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/reviews/[reviewId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reviews/[reviewId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/reviews/feed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reviews/feed.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/admin-body.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/admin-body.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/org-body.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/org-body.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/pi-avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-avatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/pi-image-picker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-image-picker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/pi-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/pi-select-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/pi-select-list.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/rating.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/rating.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/shared/user-body.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shared/user-body.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/sign-in.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sign-in.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="02eef49e-2994-4e76-935a-940a9a3c445d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +101,7 @@
       <workItem from="1673843350540" duration="13192000" />
       <workItem from="1673881481019" duration="8002000" />
       <workItem from="1673954154784" duration="12355000" />
-      <workItem from="1674048228758" duration="16197000" />
+      <workItem from="1674048228758" duration="16498000" />
     </task>
     <servers />
   </component>
