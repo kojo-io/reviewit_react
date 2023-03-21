@@ -1,15 +1,15 @@
 import Head from 'next/head'
 import {useRouter} from "next/router";
 import {useState} from "react";
-import {environment} from "./shared/environment";
-import {PiIconButton} from "./shared/pi-icon-button";
-import {MessageProps, PiMessage} from "./shared/pi-message";
-import PiInput from "./shared/pi-input";
-import {PiButton} from "./shared/pi-button";
-import {LoginResponseModel} from "./models/LoginResponseModel";
-import {ApiResponse} from "./models/ApiResponse";
-import {BaseService} from "./shared/base.service";
-import {Logo} from "./shared/logo";
+import {environment} from "../components/shared/environment";
+import {PiIconButton} from "../components/shared/pi-icon-button";
+import {MessageProps, PiMessage} from "../components/shared/pi-message";
+import PiInput from "../components/shared/pi-input";
+import {PiButton} from "../components/shared/pi-button";
+import {LoginResponseModel} from "../components/models/LoginResponseModel";
+import {ApiResponse} from "../components/models/ApiResponse";
+import {BaseService} from "../components/shared/base.service";
+import {Logo} from "../components/shared/logo";
 
 ;
 

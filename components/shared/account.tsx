@@ -1,4 +1,4 @@
-import {UserBody} from "../shared/user-body";
+import {UserBody} from "./user-body";
 import React from "react";
 import {useRouter} from "next/router";
 

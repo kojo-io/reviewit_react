@@ -1,20 +1,20 @@
 import {useRouter} from "next/router";
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
-import { PagedResponse } from "../../../models/PagedResponse";
-import {PiLoading} from "../../../shared/pi-loading";
-import {Paging} from "../../../models/paging";
-import {Rating} from "../../../shared/rating";
-import {AuthContext} from "../../../store/auth-provider";
-import {ApiResponse} from "../../../models/ApiResponse";
-import {PiTruncate} from "../../../shared/pi-truncate";
-import {PiRating} from "../../../shared/pi-rating";
-import {environment} from "../../../shared/environment";
+import { PagedResponse } from "../../../../components/models/PagedResponse";
+import {PiLoading} from "../../../../components/shared/pi-loading";
+import {Paging} from "../../../../components/models/paging";
+import {Rating} from "../../../../components/shared/rating";
+import {AuthContext} from "../../../../components/store/auth-provider";
+import {ApiResponse} from "../../../../components/models/ApiResponse";
+import {PiTruncate} from "../../../../components/shared/pi-truncate";
+import {PiRating} from "../../../../components/shared/pi-rating";
+import {environment} from "../../../../components/shared/environment";
 import {useContext, useEffect, useState} from "react";
-import {PiSkeleton} from "../../../shared/pi-skeleton";
-import {ContextInterface} from "../../../models/context-interface";
-import {Filter} from "../../../models/filter";
-import {AdminBody} from "../../../shared/admin-body";
-import {ReviewItem} from "../../../models/review item";
+import {PiSkeleton} from "../../../../components/shared/pi-skeleton";
+import {ContextInterface} from "../../../../components/models/context-interface";
+import {Filter} from "../../../../components/models/filter";
+import {AdminBody} from "../../../../components/shared/admin-body";
+import {ReviewItem} from "../../../../components/models/review item";
 
 interface Score {
     five: number;

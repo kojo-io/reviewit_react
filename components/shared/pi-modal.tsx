@@ -2,8 +2,8 @@ import ReactDOM from "react-dom";
 import {PiButton} from "./pi-button";
 
 interface Props {
-    modalSize?: 'normal' | 'large' | undefined;
-    fullScreen: false;
+    modalSize?: 'small' | 'large' | undefined;
+    fullScreen: boolean;
     onClose: () => void;
     children?: any;
 }
@@ -36,8 +36,13 @@ const Modal = (props: Props) => {
               }
           </style>
           <div className={'modal fixed inset-0 z-999999999999999999999'}>
-              <div className="flex flex-wrap content-center h-full w-full justify-center">
-                  <div className={`modal-content bg-white dark:bg-gray-800 space-y-4 p-5 w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12 rounded-xl`}>
+              <div className={`${!props.fullScreen && 'flex flex-wrap content-center justify-center'}  h-full w-full`}>
+                  <div className={`modal-content bg-white dark:bg-gray-800 overflow-auto space-y-4 p-5 w-full 
+                  ${!props.fullScreen && `max-md:h-full md:max-h-[80%] md:rounded-xl 
+                  ${props.modalSize === undefined && 'max-md:w-full md:w-7/12 2xl:w-5/12'} 
+                  ${props.modalSize === 'small' && 'max-md:w-full md:w-7/12 lg:w-5/12 2xl:w-4/12'}
+                  ${props.modalSize === 'large' && 'max-md:w-full md:w-10/12'}`}
+                  ${props.fullScreen && 'h-full'}`}>
                       {props.children}
                   </div>
               </div>

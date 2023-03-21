@@ -1,23 +1,23 @@
 import {useRouter} from "next/router";
-import {OrgBody} from "../../shared/org-body";
-import {PiSkeleton} from "../../shared/pi-skeleton";
-import {PiTruncate} from "../../shared/pi-truncate";
-import {PiRating} from "../../shared/pi-rating";
-import {environment} from "../../shared/environment";
+import {OrgBody} from "../../../components/shared/org-body";
+import {PiSkeleton} from "../../../components/shared/pi-skeleton";
+import {PiTruncate} from "../../../components/shared/pi-truncate";
+import {PiRating} from "../../../components/shared/pi-rating";
+import {environment} from "../../../components/shared/environment";
 import React, {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../store/auth-provider";
-import {ContextInterface} from "../../models/context-interface";
-import {ApiResponse} from "../../models/ApiResponse";
-import {Paging} from "../../models/paging";
-import {Filter} from "../../models/filter";
-import {Rating} from "../../shared/rating";
+import {AuthContext} from "../../../components/store/auth-provider";
+import {ContextInterface} from "../../../components/models/context-interface";
+import {ApiResponse} from "../../../components/models/ApiResponse";
+import {Paging} from "../../../components/models/paging";
+import {Filter} from "../../../components/models/filter";
+import {Rating} from "../../../components/shared/rating";
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
-import {PagedResponse} from "../../models/PagedResponse";
-import {PiLoading} from "../../shared/pi-loading";
-import {PiAvatar} from "../../shared/pi-avatar";
-import {PiModal} from "../../shared/pi-modal";
-import {CommentForm} from "../../forms/comment-form";
-import {MessageProps, PiMessage} from "../../shared/pi-message";
+import {PagedResponse} from "../../../components/models/PagedResponse";
+import {PiLoading} from "../../../components/shared/pi-loading";
+import {PiAvatar} from "../../../components/shared/pi-avatar";
+import {PiModal} from "../../../components/shared/pi-modal";
+import {CommentForm} from "../../../components/forms/comment-form";
+import {MessageProps, PiMessage} from "../../../components/shared/pi-message";
 
 interface Score {
     five: number;

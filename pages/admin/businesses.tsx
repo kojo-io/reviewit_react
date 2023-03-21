@@ -1,20 +1,20 @@
-import {AdminBody} from "../shared/admin-body";
-import {environment} from "../shared/environment";
+import {AdminBody} from "../../components/shared/admin-body";
+import {environment} from "../../components/shared/environment";
 import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../store/auth-provider";
+import {AuthContext} from "../../components/store/auth-provider";
 import {useRouter} from "next/router";
-import {ContextInterface} from "../models/context-interface";
-import {Paging} from "../models/paging";
-import {PiModal} from "../shared/pi-modal";
-import {Organization} from "../models/Organization";
-import {OrganizationForm} from "../forms/organization-form";
-import {PiSkeleton} from "../shared/pi-skeleton";
-import {PiSkeletonWrapper} from "../shared/pi-skeleton-wrapper";
-import {ApiResponse} from "../models/ApiResponse";
-import {MessageProps} from "../shared/pi-message";
-import {PagedResponse} from "../models/PagedResponse";
-import {Filter} from "../models/filter";
-import {PiButton} from "../shared/pi-button";
+import {ContextInterface} from "../../components/models/context-interface";
+import {Paging} from "../../components/models/paging";
+import {PiModal} from "../../components/shared/pi-modal";
+import {Organization} from "../../components/models/Organization";
+import {OrganizationForm} from "../../components/forms/organization-form";
+import {PiSkeleton} from "../../components/shared/pi-skeleton";
+import {PiSkeletonWrapper} from "../../components/shared/pi-skeleton-wrapper";
+import {ApiResponse} from "../../components/models/ApiResponse";
+import {MessageProps} from "../../components/shared/pi-message";
+import {PagedResponse} from "../../components/models/PagedResponse";
+import {Filter} from "../../components/models/filter";
+import {PiButton} from "../../components/shared/pi-button";
 
 export default function Businesses() {
     const url = environment.apiUrl;

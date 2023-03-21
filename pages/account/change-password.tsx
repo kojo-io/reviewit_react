@@ -1,16 +1,16 @@
 import React, {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../store/auth-provider";
-import {ContextInterface} from "../models/context-interface";
-import {User} from "../models/User";
-import {MessageProps, PiMessage} from "../shared/pi-message";
-import {environment} from "../shared/environment";
-import {ApiResponse} from "../models/ApiResponse";
-import {LoginResponseModel} from "../models/LoginResponseModel";
-import {BaseService} from "../shared/base.service";
-import {Account} from "./account";
-import PiImagePicker from "../shared/pi-image-picker";
-import PiInput from "../shared/pi-input";
-import {PiButton} from "../shared/pi-button";
+import {AuthContext} from "../../components/store/auth-provider";
+import {ContextInterface} from "../../components/models/context-interface";
+import {User} from "../../components/models/User";
+import {MessageProps, PiMessage} from "../../components/shared/pi-message";
+import {environment} from "../../components/shared/environment";
+import {ApiResponse} from "../../components/models/ApiResponse";
+import {LoginResponseModel} from "../../components/models/LoginResponseModel";
+import {BaseService} from "../../components/shared/base.service";
+import {Account} from "../../components/shared/account";
+import PiImagePicker from "../../components/shared/pi-image-picker";
+import PiInput from "../../components/shared/pi-input";
+import {PiButton} from "../../components/shared/pi-button";
 
 export default function ChangePassword() {
     const context = useContext(AuthContext);

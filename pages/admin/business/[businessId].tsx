@@ -1,21 +1,21 @@
 import {useRouter} from "next/router";
-import {environment} from "../../shared/environment";
+import {environment} from "../../../components/shared/environment";
 import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../store/auth-provider";
-import {Paging} from "../../models/paging";
-import {Filter} from "../../models/filter";
-import {ReviewItem} from "../../models/review item";
-import {ApiResponse} from "../../models/ApiResponse";
-import {MessageProps} from "../../shared/pi-message";
-import {ContextInterface} from "../../models/context-interface";
-import {AdminBody} from "../../shared/admin-body";
-import {PiSkeletonWrapper} from "../../shared/pi-skeleton-wrapper";
-import {PiSkeleton} from "../../shared/pi-skeleton";
-import {PiTruncate} from "../../shared/pi-truncate";
-import {PiRating} from "../../shared/pi-rating";
-import {PiButton} from "../../shared/pi-button";
-import {Organization} from "../../models/Organization";
-import {PagedResponse} from "../../models/PagedResponse"
+import {AuthContext} from "../../../components/store/auth-provider";
+import {Paging} from "../../../components/models/paging";
+import {Filter} from "../../../components/models/filter";
+import {ReviewItem} from "../../../components/models/review item";
+import {ApiResponse} from "../../../components/models/ApiResponse";
+import {MessageProps} from "../../../components/shared/pi-message";
+import {ContextInterface} from "../../../components/models/context-interface";
+import {AdminBody} from "../../../components/shared/admin-body";
+import {PiSkeletonWrapper} from "../../../components/shared/pi-skeleton-wrapper";
+import {PiSkeleton} from "../../../components/shared/pi-skeleton";
+import {PiTruncate} from "../../../components/shared/pi-truncate";
+import {PiRating} from "../../../components/shared/pi-rating";
+import {PiButton} from "../../../components/shared/pi-button";
+import {Organization} from "../../../components/models/Organization";
+import {PagedResponse} from "../../../components/models/PagedResponse"
 
 export default function BusinessId() {
     const router = useRouter();
@@ -321,7 +321,6 @@ export default function BusinessId() {
                                                 <img src={'/empty-folder.png'} className={'w-[150px] h-[150px] m-auto'} />
                                                 <label className={'block text-center uppercase'}>{organization?.name} has no reviews posted yet.</label>
                                             </div>
-
                                         </>
                                     }
                                     {

@@ -1,16 +1,16 @@
-import {Account} from "./account";
-import {environment} from "../shared/environment";
+import {Account} from "../../components/shared/account";
+import {environment} from "../../components/shared/environment";
 import React, {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../store/auth-provider";
-import {ContextInterface} from "../models/context-interface";
-import PiInput from "../shared/pi-input";
-import {User} from "../models/User";
-import PiImagePicker from "../shared/pi-image-picker";
-import {PiButton} from "../shared/pi-button";
-import {ApiResponse} from "../models/ApiResponse";
-import {LoginResponseModel} from "../models/LoginResponseModel";
-import {BaseService} from "../shared/base.service";
-import {MessageProps, PiMessage} from "../shared/pi-message";
+import {AuthContext} from "../../components/store/auth-provider";
+import {ContextInterface} from "../../components/models/context-interface";
+import PiInput from "../../components/shared/pi-input";
+import {User} from "../../components/models/User";
+import PiImagePicker from "../../components/shared/pi-image-picker";
+import {PiButton} from "../../components/shared/pi-button";
+import {ApiResponse} from "../../components/models/ApiResponse";
+import {LoginResponseModel} from "../../components/models/LoginResponseModel";
+import {BaseService} from "../../components/shared/base.service";
+import {MessageProps, PiMessage} from "../../components/shared/pi-message";
 
 export default function Profile() {
     const context = useContext(AuthContext);
